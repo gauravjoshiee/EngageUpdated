@@ -1,0 +1,4 @@
+identifier_source_customer_id|external_identifier_id|identifier_type|identifier_country|identifier_value|identifier_state|identifier_province|identifier_is_primary|identifier_is_active|identifier_start_date|identifier_end_date|class_type|class_number|identifier_flex_field_1|identifier_flex_field_2|identifier_flex_field_3|identifier_flex_field_4|identifier_flex_field_5|identifier_flex_field_6|identifier_flex_field_7|identifier_flex_field_8|identifier_flex_field_9|identifier_flex_field_10
+Change1||STLIC|United States|CH08723|Northern Mariana Islands||TRUE|TRUE||||||||||||||
+Change2||STLIC|United States|CH08724|US Virgin Islands||TRUE|TRUE||||||||||||||
+Change3||STLIC|United States|CH08725|Northern Marianas||TRUE|TRUE||||||||||||||

@@ -1,0 +1,3750 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+	
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css' />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link href='https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ff53917fbbdb5ef820abbbe4d199a6942dc771ff/v3html/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>Automation Report</title>
+
+	<style type='text/css'>
+		/* json-tree */
+		.jstBracket,.jstComma,.jstValue{white-space:pre-wrap}.jstValue{font-size:10px;font-weight:400;font-family:"Lucida Console",Monaco,monospace}.jstProperty{color:#666;word-wrap:break-word}.jstBool{color:#2525CC}.jstNum{color:#D036D0}.jstNull{color:gray}.jstStr{color:#2DB669}.jstFold:after{content:' -';cursor:pointer}.jstExpand{white-space:normal}.jstExpand:after{content:' +';cursor:pointer}.jstFolded{white-space:normal!important}.jstHiddenBlock{display:none}
+	</style>
+	
+	<script type="text/javascript">
+		/*! json-tree - v0.2.2 - 2017-09-25, MIT LICENSE */
+		var JSONTree=function(){var n={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","/":"&#x2F;"},t=0,r=0;this.create=function(n,t){return r+=1,N(u(n,0,!1),{class:"jstValue"})};var e=function(t){return t.replace(/[&<>'"]/g,function(t){return n[t]})},s=function(){return r+"_"+t++},u=function(n,t,r){if(null===n)return f(r?t:0);switch(typeof n){case"boolean":return l(n,r?t:0);case"number":return i(n,r?t:0);case"string":return o(n,r?t:0);default:return n instanceof Array?a(n,t,r):c(n,t,r)}},c=function(n,t,r){var e=s(),u=Object.keys(n).map(function(r){return j(r,n[r],t+1,!0)}).join(m()),c=[g("{",r?t:0,e),N(u,{id:e}),p("}",t)].join("\n");return N(c,{})},a=function(n,t,r){var e=s(),c=n.map(function(n){return u(n,t+1,!0)}).join(m());return[g("[",r?t:0,e),N(c,{id:e}),p("]",t)].join("\n")},o=function(n,t){var r=e(JSON.stringify(n));return N(v(r,t),{class:"jstStr"})},i=function(n,t){return N(v(n,t),{class:"jstNum"})},l=function(n,t){return N(v(n,t),{class:"jstBool"})},f=function(n){return N(v("null",n),{class:"jstNull"})},j=function(n,t,r){var s=v(e(JSON.stringify(n))+": ",r),c=N(u(t,r,!1),{});return N(s+c,{class:"jstProperty"})},m=function(){return N(",\n",{class:"jstComma"})},N=function(n,t){return d("span",t,n)},d=function(n,t,r){return"<"+n+Object.keys(t).map(function(n){return" "+n+'="'+t[n]+'"'}).join("")+">"+r+"</"+n+">"},g=function(n,t,r){return N(v(n,t),{class:"jstBracket"})+N("",{class:"jstFold",onclick:"JSONTree.toggle('"+r+"')"})};this.toggle=function(n){var t=document.getElementById(n),r=t.parentNode,e=t.previousElementSibling;""===t.className?(t.className="jstHiddenBlock",r.className="jstFolded",e.className="jstExpand"):(t.className="",r.className="",e.className="jstFold")};var p=function(n,t){return N(v(n,t),{})},v=function(n,t){return Array(2*t+1).join(" ")+n};return this}();
+	</script>
+</head>
+	<body class='extent standard default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo black"><img src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/img/logo.png"></a>
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></a></li>
+		</ul>
+		<!-- report name -->
+		<span class='report-name'>ITR_MDM - Functional Test Report</span>
+		<!-- report headline -->
+		<span class='report-headline'></span>
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<a href='#!'>
+			<span class='label blue darken-3 suite-start-time'>Nov 5, 2020 03:43:43 PM</span>
+			</a>
+		</ul>
+	</div>
+</nav>		<!-- container -->
+		<div class='container'>
+<div id='test-view' class='view'>
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+				<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+										<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+					<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+					<li status='skip'><a href='#!'>Skip <i class='material-icons cyan-text'>redo</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+			<!-- category toggle -->
+			<!-- category toggle -->
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+				<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+				<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+				<i class='material-icons'>search</i> Search
+				</a>
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+<div id='test-view-charts' class='subview-full'>
+    <div id='charts-row' class='row nm-v nm-h'>
+        <div class='col s12 m12 l12 np-h'>
+            <div class='card-panel nm-v'>
+                <div class='left panel-name'>Tests</div>
+                <div class='chart-box' style="max-height:94px;">
+                    <canvas id='parent-analysis' width='90' height='70'></canvas>
+                </div>
+                <div class='block text-small'>
+                    <span class='tooltipped' data-position='top' data-tooltip='17.241%'><span class='strong'>5</span> test(s) passed</span>
+                </div>
+                <div class='block text-small'>
+                    <span class='strong tooltipped' data-position='top' data-tooltip='6.897%'>2</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='75.862%'>22</span> skipped
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="timeline-chart" class="row nm-v nm-h">
+        <div class="col s12 m12 l12 np-h">
+            <div class="card-panel">
+                <div class='left panel-name'>Timeline (seconds)</div>
+                <div class="chart-box" style="width:98%;max-height:145px;">
+                    <canvas id="timeline" height="120"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>	<div class='subview-left left'>
+		<div class='view-summary'>
+			<ul id='test-collection' class='test-collection'>
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>TC09_SPN_Submission</span>
+						<span class='test-time'>Nov 5, 2020 03:43:45 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:43:45 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:47:23 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 3m 37s+724ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:43:49 PM</td>
+				<td class='step-details'>
+						TS_01 is passed - Successfully completed action - Open browser : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:12 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Launch application : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:13 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Input Username : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:14 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Input Password : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:15 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Click on Sign In : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:19 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Wait for landing page link : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:21 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action - Click on Educational Module link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:21 PM</td>
+				<td class='step-details'>
+						TS_08 is passed - Successfully completed action - Wait for Internal Requestor link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:22 PM</td>
+				<td class='step-details'>
+						TS_09 is passed - Successfully completed action - Click on Internal Requestor link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:23 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action - Wait for loader screen : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:24 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action - Wait for Dashboard thumbnail button : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:29 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action - Click on Dashboard thumbnail buttom : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:30 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:30 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action -  : Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:32 PM</td>
+				<td class='step-details'>
+						TS_01 is passed - Successfully completed action - Click Submit New Request button : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:44 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Wait for loader : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:44 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Wait for next page element : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:45 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Click on Country dropdown : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:46 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:52 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:52 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:44:54 PM</td>
+				<td class='step-details'>
+						TS_08 is passed - Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:01 PM</td>
+				<td class='step-details'>
+						TS_09 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:01 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:03 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action - Select first organization : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:20 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:20 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:21 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:22 PM</td>
+				<td class='step-details'>
+						TS_15 is passed - Successfully completed action - Select BU for request submission : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:23 PM</td>
+				<td class='step-details'>
+						TS_16 is passed - Successfully completed action - Click on Proceed button : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:35 PM</td>
+				<td class='step-details'>
+						TS_17 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:35 PM</td>
+				<td class='step-details'>
+						TS_18 is passed - Successfully completed action - Validate Request selection page got loaded : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:35 PM</td>
+				<td class='step-details'>
+						TS_18 is passed - Successfully completed action - Validate Request selection page got loaded : Successfully completed action - Validate Request selection page got loaded : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:36 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Wait for clickable :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:37 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Click Select Charitable Request :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:39 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:41 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Click Proceed button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:50 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:51 PM</td>
+				<td class='step-details'>
+						TS_08 is passed - Successfully completed action - Click on Area of Focus field :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:53 PM</td>
+				<td class='step-details'>
+						TS_09 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:55 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action - Select value from drop down :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:56 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action - Focus Out :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:45:59 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action - wait for page load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:00 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Input Program Title :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:01 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - CLick on detailed purpose drop down :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:03 PM</td>
+				<td class='step-details'>
+						TS_15 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:04 PM</td>
+				<td class='step-details'>
+						TS_16 is passed - Successfully completed action - Select Detail Purpose dropdown item 1 :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:05 PM</td>
+				<td class='step-details'>
+						TS_17 is passed - Successfully completed action - Select option for  healthcare professionals attending? :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:06 PM</td>
+				<td class='step-details'>
+						TS_18 is passed - Successfully completed action - Select option for "Are other sponsorship tiers available?" :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:07 PM</td>
+				<td class='step-details'>
+						TS_19 is passed - Successfully completed action - Inut Decision Needed By date :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:07 PM</td>
+				<td class='step-details'>
+						TS_20 is passed - Successfully completed action - Input Requested Amount :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:07 PM</td>
+				<td class='step-details'>
+						TS_21 is passed - Successfully completed action - Provide detail for other event that you would like support for :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:08 PM</td>
+				<td class='step-details'>
+						TS_22 is passed - Successfully completed action - Provide business justification :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:09 PM</td>
+				<td class='step-details'>
+						TS_23 is passed - Successfully completed action - Select if program accredited :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:10 PM</td>
+				<td class='step-details'>
+						TS_24 is passed - Successfully completed action - Select "Have you held this program previously?" :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:11 PM</td>
+				<td class='step-details'>
+						TS_25 is passed - Successfully completed action - Select "Has Carl Zeiss previously supported this program?" :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:13 PM</td>
+				<td class='step-details'>
+						TS_26 is passed - Successfully completed action - Click to proceed for next tab :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:16 PM</td>
+				<td class='step-details'>
+						TS_27 is passed - Successfully completed action - Wait for loader disappear : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:16 PM</td>
+				<td class='step-details'>
+						TS_28 is passed - Successfully completed action - Wait for element clickable :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:18 PM</td>
+				<td class='step-details'>
+						TS_29 is passed - Successfully completed action - Click on Sponsorship Benefit Type :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:19 PM</td>
+				<td class='step-details'>
+						TS_30 is passed - Successfully completed action - Select Sponsorship Benefit Type :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:20 PM</td>
+				<td class='step-details'>
+						TS_31 is passed - Successfully completed action - Focus out :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:20 PM</td>
+				<td class='step-details'>
+						TS_32 is passed - Successfully completed action - Select Benefit Start Date :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:21 PM</td>
+				<td class='step-details'>
+						TS_33 is passed - Successfully completed action - Select Benefit End Date :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:22 PM</td>
+				<td class='step-details'>
+						TS_34 is passed - Successfully completed action - Click on Target Geographic Reach button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:23 PM</td>
+				<td class='step-details'>
+						TS_35 is passed - Successfully completed action - Select Target Geographic Reach :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:24 PM</td>
+				<td class='step-details'>
+						TS_36 is passed - Successfully completed action - Input Venue Name :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:24 PM</td>
+				<td class='step-details'>
+						TS_37 is passed - Successfully completed action - Input Venue street address :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:25 PM</td>
+				<td class='step-details'>
+						TS_38 is passed - Successfully completed action - Click Venue country dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:26 PM</td>
+				<td class='step-details'>
+						TS_39 is passed - Successfully completed action - Select Country :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:30 PM</td>
+				<td class='step-details'>
+						TS_40 is passed - Successfully completed action - Wait for loader disappear : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:31 PM</td>
+				<td class='step-details'>
+						TS_41 is passed - Successfully completed action - Click on Venue State dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:32 PM</td>
+				<td class='step-details'>
+						TS_42 is passed - Successfully completed action - Select Venue State :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:32 PM</td>
+				<td class='step-details'>
+						TS_43 is passed - Successfully completed action - Input Venue City :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:33 PM</td>
+				<td class='step-details'>
+						TS_44 is passed - Successfully completed action - Input Venue postal code :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:34 PM</td>
+				<td class='step-details'>
+						TS_45 is passed - Successfully completed action - Click on Audience Group dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:35 PM</td>
+				<td class='step-details'>
+						TS_46 is passed - Successfully completed action - Select Audience Group :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:38 PM</td>
+				<td class='step-details'>
+						TS_47 is passed - Successfully completed action - Wait for loader disappear : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:38 PM</td>
+				<td class='step-details'>
+						TS_48 is passed - Successfully completed action - Input reach :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:39 PM</td>
+				<td class='step-details'>
+						TS_49 is passed - Successfully completed action - Select FMV option :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:39 PM</td>
+				<td class='step-details'>
+						TS_50 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:40 PM</td>
+				<td class='step-details'>
+						TS_51 is passed - Successfully completed action - Provide reason for FMV option :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:41 PM</td>
+				<td class='step-details'>
+						TS_52 is passed - Successfully completed action - Click on button to save benefit :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:44 PM</td>
+				<td class='step-details'>
+						TS_53 is passed - Successfully completed action - wait for page load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:44 PM</td>
+				<td class='step-details'>
+						TS_54 is passed - Successfully completed action - Validate detail saved in read only table :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:45 PM</td>
+				<td class='step-details'>
+						TS_55 is passed - Successfully completed action - Click to proceed for next tab :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:48 PM</td>
+				<td class='step-details'>
+						TS_56 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:50 PM</td>
+				<td class='step-details'>
+						TS_57 is passed - Successfully completed action - Upload mandatory document :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:52 PM</td>
+				<td class='step-details'>
+						TS_58 is passed - Successfully completed action - Wait for file upload :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:54 PM</td>
+				<td class='step-details'>
+						TS_59 is passed - Successfully completed action - Click to proceed for next tab :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:56 PM</td>
+				<td class='step-details'>
+						TS_60 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:56 PM</td>
+				<td class='step-details'>
+						TS_61 is passed - Successfully completed action - Input Auth Signer name :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:57 PM</td>
+				<td class='step-details'>
+						TS_62 is passed - Successfully completed action - Input Auth signer last name :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:57 PM</td>
+				<td class='step-details'>
+						TS_63 is passed - Successfully completed action - Input Auth signer email address :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:46:59 PM</td>
+				<td class='step-details'>
+						TS_64 is passed - Successfully completed action - Click to proceed for next tab :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:02 PM</td>
+				<td class='step-details'>
+						TS_65 is passed - Successfully completed action - wait for page load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:02 PM</td>
+				<td class='step-details'>
+						TS_66 is passed - Successfully completed action - Wait for element clickable :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:03 PM</td>
+				<td class='step-details'>
+						TS_67 is passed - Successfully completed action - Collect Request ID :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:05 PM</td>
+				<td class='step-details'>
+						TS_68 is passed - Successfully completed action - Select Agreement checkbox :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:11 PM</td>
+				<td class='step-details'>
+						TS_69 is passed - Successfully completed action - wait for page load : Element to wait did not appear
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:12 PM</td>
+				<td class='step-details'>
+						TS_70 is passed - Successfully completed action - Click to proceed for inbox :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:15 PM</td>
+				<td class='step-details'>
+						TS_71 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:17 PM</td>
+				<td class='step-details'>
+						TS_72 is passed - Successfully completed action - Click on Proceed button to go to Inbox :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:22 PM</td>
+				<td class='step-details'>
+						TS_73 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:23 PM</td>
+				<td class='step-details'>
+						TS_74 is passed - Successfully completed action - Close browser :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:23 PM</td>
+				<td class='step-details'>
+						TC09_SPN_Submission is passed - Successfully completed action - Close browser :
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>TC49_SPN_RAI</span>
+						<span class='test-time'>Nov 5, 2020 03:47:24 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:47:24 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:49:12 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 47s+813ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:27 PM</td>
+				<td class='step-details'>
+						TS_01 is passed - Successfully completed action - Open Browser : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:43 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Launch application : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:44 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Input Username : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:45 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Input Password : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:46 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Click on Sign In : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:56 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Wait for landing page link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:47:57 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Click on Commercial Module : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:02 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Wait for next link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:02 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Wait for next link : Successfully completed action - Wait for next link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:08 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Click on View Activities for Initial Review group :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:14 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Wait for page visible :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:14 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Click on the submitted charitable request :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:29 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Wait for review page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:29 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Validate review page if loaded :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:31 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action - Validate Request Status : Actual data - Coordinator Review matches with Expected data - Coordinator Review
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:32 PM</td>
+				<td class='step-details'>
+						TS_08 is passed - Successfully completed action - Click on Program Title field checkbox for RAI :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:34 PM</td>
+				<td class='step-details'>
+						TS_09 is passed - Successfully completed action - Click on Request Additional Information button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:47 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action - Wait for Div Loader : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:47 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action - Wait for Next element available :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:52 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action - Click on Send button to complete RAI :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:58 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Wait for loader : Element to wait did not appear
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:48:59 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Click on RAI'd request :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:10 PM</td>
+				<td class='step-details'>
+						TS_15 is passed - Successfully completed action - Wait for loader : Element to wait did not appear
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:11 PM</td>
+				<td class='step-details'>
+						TS_16 is passed - Successfully completed action - Validate Status : Actual data - Pending Additional Information matches with Expected data - Pending Additional Information
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:12 PM</td>
+				<td class='step-details'>
+						TS_17 is passed - Successfully completed action - Close Browser :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:12 PM</td>
+				<td class='step-details'>
+						TC49_SPN_RAI is passed - Successfully completed action - Close Browser :
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>TC50_SPN_RAISubmission</span>
+						<span class='test-time'>Nov 5, 2020 03:49:14 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:49:14 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:50:46 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 32s+491ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:16 PM</td>
+				<td class='step-details'>
+						TS_01 is passed - Successfully completed action - Open browser : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:33 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Launch application : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:34 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Input Username : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:35 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Input Password : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:36 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Click on Sign In : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:44 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Wait for landing page link : Element to wait did not appear
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:46 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action - Click on Educational Module link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:46 PM</td>
+				<td class='step-details'>
+						TS_08 is passed - Successfully completed action - Wait for Internal Requestor link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:47 PM</td>
+				<td class='step-details'>
+						TS_09 is passed - Successfully completed action - Click on Internal Requestor link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:48 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action - Wait for loader screen : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:48 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action - Wait for Dashboard thumbnail button : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:53 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action - Click on Dashboard thumbnail buttom : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:57 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:57 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action -  : Successfully completed action -  : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:49:58 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action - Click on row having text from data variable :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:08 PM</td>
+				<td class='step-details'>
+						TS_08 is passed - Successfully completed action - Wait for Div Loader : Element to wait did not appear
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:08 PM</td>
+				<td class='step-details'>
+						TS_09 is passed - Successfully completed action - Wait for Next element available :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:10 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action - Click on button to Proceed :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:16 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:17 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action -  :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:17 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Update RAI'd field for Program Title :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:19 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Click to proceed for Sponsorship Benefits :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:22 PM</td>
+				<td class='step-details'>
+						TS_15 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:22 PM</td>
+				<td class='step-details'>
+						TS_16 is passed - Successfully completed action -  :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:23 PM</td>
+				<td class='step-details'>
+						TS_17 is passed - Successfully completed action - Click to proceed for Documents Upload :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:26 PM</td>
+				<td class='step-details'>
+						TS_18 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:27 PM</td>
+				<td class='step-details'>
+						TS_19 is passed - Successfully completed action -  :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:28 PM</td>
+				<td class='step-details'>
+						TS_20 is passed - Successfully completed action - Click to proceed for Authorize Signer :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:30 PM</td>
+				<td class='step-details'>
+						TS_21 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:30 PM</td>
+				<td class='step-details'>
+						TS_22 is passed - Successfully completed action -  :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:32 PM</td>
+				<td class='step-details'>
+						TS_23 is passed - Successfully completed action - Click to proceed for Request Review :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:35 PM</td>
+				<td class='step-details'>
+						TS_24 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:35 PM</td>
+				<td class='step-details'>
+						TS_25 is passed - Successfully completed action -  :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:37 PM</td>
+				<td class='step-details'>
+						TS_26 is passed - Successfully completed action - Click to submit RAI :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:41 PM</td>
+				<td class='step-details'>
+						TS_27 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:41 PM</td>
+				<td class='step-details'>
+						TS_28 is passed - Successfully completed action -  :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:42 PM</td>
+				<td class='step-details'>
+						TS_29 is passed - Successfully completed action - Click to proceed for inbox :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:45 PM</td>
+				<td class='step-details'>
+						TS_30 is passed - Successfully completed action -  : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:46 PM</td>
+				<td class='step-details'>
+						TS_31 is passed - Successfully completed action - Close Browser :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:46 PM</td>
+				<td class='step-details'>
+						TC50_SPN_RAISubmission is passed - Successfully completed action - Close Browser :
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>TC10_SPN_Review</span>
+						<span class='test-time'>Nov 5, 2020 03:50:47 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:50:47 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:52:47 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 59s+757ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:50:49 PM</td>
+				<td class='step-details'>
+						TS_01 is passed - Successfully completed action - Open Browser : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:01 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Launch application : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:02 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Input Username : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:02 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Input Password : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:04 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Click on Sign In : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:14 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Wait for landing page link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:15 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Click on Commercial Module : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:20 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Wait for next link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:20 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Wait for next link : Successfully completed action - Wait for next link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:26 PM</td>
+				<td class='step-details'>
+						TS_17 is passed - Successfully completed action - Click on View Activities for My Action group :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:41 PM</td>
+				<td class='step-details'>
+						TS_18 is passed - Successfully completed action - Wait for load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:41 PM</td>
+				<td class='step-details'>
+						TS_19 is passed - Successfully completed action - Wait for page visible :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:46 PM</td>
+				<td class='step-details'>
+						TS_21 is passed - Successfully completed action - Wait for load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:51:46 PM</td>
+				<td class='step-details'>
+						TS_22 is passed - Successfully completed action - Click on the submitted charitable request :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:01 PM</td>
+				<td class='step-details'>
+						TS_23 is passed - Successfully completed action - Wait for review page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:01 PM</td>
+				<td class='step-details'>
+						TS_24 is passed - Successfully completed action - Validate review page if loaded :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:03 PM</td>
+				<td class='step-details'>
+						TS_25 is passed - Successfully completed action - Validate Request Status : Actual data - Coordinator Review matches with Expected data - Coordinator Review
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:04 PM</td>
+				<td class='step-details'>
+						TS_26 is passed - Successfully completed action - Click on Route request button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:19 PM</td>
+				<td class='step-details'>
+						TS_27 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:19 PM</td>
+				<td class='step-details'>
+						TS_28 is passed - Successfully completed action - Validate Route request page is loaded : Actual data - - Request ID 2020-RMS-SPN -2013 contains Expected data - SPNRequestID
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:21 PM</td>
+				<td class='step-details'>
+						TS_30 is passed - Successfully completed action - Click on Approval Group Check box :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:23 PM</td>
+				<td class='step-details'>
+						TS_31 is passed - Successfully completed action - Wait for element load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:24 PM</td>
+				<td class='step-details'>
+						TS_32 is passed - Successfully completed action - Click on Approval Group Selection drop down :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:25 PM</td>
+				<td class='step-details'>
+						TS_33 is passed - Successfully completed action - Select approval group :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:31 PM</td>
+				<td class='step-details'>
+						TS_34 is passed - Successfully completed action - Click on Route request button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:46 PM</td>
+				<td class='step-details'>
+						TS_35 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:47 PM</td>
+				<td class='step-details'>
+						TS_42 is passed - Successfully completed action - Close Browser :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:47 PM</td>
+				<td class='step-details'>
+						TC10_SPN_Review is passed - Successfully completed action - Close Browser :
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>TC11_SPN_Approval</span>
+						<span class='test-time'>Nov 5, 2020 03:52:48 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:52:48 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:55:42 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 2m 53s+280ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:52:50 PM</td>
+				<td class='step-details'>
+						TS_01 is passed - Successfully completed action - Open browser :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:07 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Launch application :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:08 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Input Username :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:09 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Input Password :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:10 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Click on Sign In :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:20 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Wait for landing page link :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:21 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action - Click on Commercial Module :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:26 PM</td>
+				<td class='step-details'>
+						TS_08 is passed - Successfully completed action - Wait for next link :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:27 PM</td>
+				<td class='step-details'>
+						TS_09 is passed - Successfully completed action - Click on Approver link :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:32 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action - Wait for next link :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:38 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action - Click on View Activities for My Action group :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:53 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action - Wait for load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:53 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Wait for page visible :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:58 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Wait for load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:53:58 PM</td>
+				<td class='step-details'>
+						TS_15 is passed - Successfully completed action - Click on the submitted charitable request :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:14 PM</td>
+				<td class='step-details'>
+						TS_16 is passed - Successfully completed action - Wait for review page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:14 PM</td>
+				<td class='step-details'>
+						TS_17 is passed - Successfully completed action - Validate review page if loaded :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:15 PM</td>
+				<td class='step-details'>
+						TS_18 is passed - Successfully completed action - Validate Request Status : Actual data - Approver Review matches with Expected data - Approver Review
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:16 PM</td>
+				<td class='step-details'>
+						TS_19 is passed - Successfully completed action - Click on Route request button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:31 PM</td>
+				<td class='step-details'>
+						TS_20 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:33 PM</td>
+				<td class='step-details'>
+						TS_21 is passed - Successfully completed action - Click Budget Year Dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:34 PM</td>
+				<td class='step-details'>
+						TS_22 is passed - Successfully completed action - Click Budget code year :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:39 PM</td>
+				<td class='step-details'>
+						TS_23 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:40 PM</td>
+				<td class='step-details'>
+						TS_24 is passed - Successfully completed action - Click Budget Code 1 Dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:41 PM</td>
+				<td class='step-details'>
+						TS_25 is passed - Successfully completed action - Click Budget Code 1 value :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:46 PM</td>
+				<td class='step-details'>
+						TS_26 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:48 PM</td>
+				<td class='step-details'>
+						TS_27 is passed - Successfully completed action - Click Budget Code 2 Dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:49 PM</td>
+				<td class='step-details'>
+						TS_28 is passed - Successfully completed action - Click Budget Code 2 value :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:54 PM</td>
+				<td class='step-details'>
+						TS_29 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:55 PM</td>
+				<td class='step-details'>
+						TS_30 is passed - Successfully completed action - Click Budget Code 3 Dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:54:56 PM</td>
+				<td class='step-details'>
+						TS_31 is passed - Successfully completed action - Click Budget Code 3 value :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:01 PM</td>
+				<td class='step-details'>
+						TS_32 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:03 PM</td>
+				<td class='step-details'>
+						TS_33 is passed - Successfully completed action - Click Budget Code 4 Dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:04 PM</td>
+				<td class='step-details'>
+						TS_34 is passed - Successfully completed action - Click Budget Code 4 value :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:09 PM</td>
+				<td class='step-details'>
+						TS_35 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:10 PM</td>
+				<td class='step-details'>
+						TS_36 is passed - Successfully completed action - Click Budget Code 5 Dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:11 PM</td>
+				<td class='step-details'>
+						TS_37 is passed - Successfully completed action - Click Budget Code 2 value :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:16 PM</td>
+				<td class='step-details'>
+						TS_38 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:17 PM</td>
+				<td class='step-details'>
+						TS_39 is passed - Successfully completed action - Input percentage value :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:18 PM</td>
+				<td class='step-details'>
+						TS_40 is passed - Successfully completed action - Click Save budget button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:23 PM</td>
+				<td class='step-details'>
+						TS_41 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:24 PM</td>
+				<td class='step-details'>
+						TS_42 is passed - Successfully completed action - Click Submit decision button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:26 PM</td>
+				<td class='step-details'>
+						TS_43 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:30 PM</td>
+				<td class='step-details'>
+						TS_44 is passed - Successfully completed action - Click Ok button on decision confirmation pop up :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:40 PM</td>
+				<td class='step-details'>
+						TS_45 is passed - Successfully completed action - Wait for page to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:42 PM</td>
+				<td class='step-details'>
+						TS_46 is passed - Successfully completed action - Close the browser :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:42 PM</td>
+				<td class='step-details'>
+						TC11_SPN_Approval is passed - Successfully completed action - Close the browser :
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>TC12_SPN_LOA_Payment</span>
+						<span class='test-time'>Nov 5, 2020 03:55:43 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:55:43 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:58:07 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 2m 24s+53ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:45 PM</td>
+				<td class='step-details'>
+						TS_01 is passed - Successfully completed action - Open Browser : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:55:59 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Launch application : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:00 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Input Username : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:01 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Input Password : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:02 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Click on Sign In : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:12 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Wait for landing page link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:13 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Click on Commercial Module : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:18 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Wait for next link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:18 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Wait for next link : Successfully completed action - Wait for next link : null
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:24 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Click on View Activities for My Action group :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:39 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Wait for load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:39 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Click on approved request ID :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:50 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Wait for load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:56:51 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - Click on Send LOA button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:01 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action - Wait for load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:12 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action - Click to proceed Next :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:22 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action - Wait for load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:23 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action - Validate Request status : Actual data - Pending Agreement matches with Expected data - Pending Agreement
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:25 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Click to upload LOA :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:27 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - wait for loader screen : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:29 PM</td>
+				<td class='step-details'>
+						TS_15 is passed - Successfully completed action - Focus on open pop up :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:31 PM</td>
+				<td class='step-details'>
+						TS_16 is passed - Successfully completed action - Upload LOA document :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:34 PM</td>
+				<td class='step-details'>
+						TS_17 is passed - Successfully completed action - wait for action to complete :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:36 PM</td>
+				<td class='step-details'>
+						TS_18 is passed - Successfully completed action - Submit uploaded LOA :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:41 PM</td>
+				<td class='step-details'>
+						TS_19 is passed - Successfully completed action - wait for action to complete :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:42 PM</td>
+				<td class='step-details'>
+						TS_20 is passed - Successfully completed action - Validate Request Status : Actual data - Pending Payment matches with Expected data - Pending Payment
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:43 PM</td>
+				<td class='step-details'>
+						TS_31 is passed - Successfully completed action - Expand Comments section :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:44 PM</td>
+				<td class='step-details'>
+						TS_32 is passed - Successfully completed action - Provide business justification :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:45 PM</td>
+				<td class='step-details'>
+						TS_33 is passed - Successfully completed action - Click on Save button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:48 PM</td>
+				<td class='step-details'>
+						TS_34 is passed - Successfully completed action - Wait for load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:50 PM</td>
+				<td class='step-details'>
+						TS_35 is passed - Successfully completed action - Select FMV option :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:53 PM</td>
+				<td class='step-details'>
+						TS_36 is passed - Successfully completed action - Wait for load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:53 PM</td>
+				<td class='step-details'>
+						TS_37 is passed - Successfully completed action - Provide comment for FMV option select :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:55 PM</td>
+				<td class='step-details'>
+						TS_38 is passed - Successfully completed action - Click on Save button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:58 PM</td>
+				<td class='step-details'>
+						TS_39 is passed - Successfully completed action - Wait for load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:58 PM</td>
+				<td class='step-details'>
+						TS_40 is passed - Successfully completed action - Provide comments for Due Diligence field :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:57:59 PM</td>
+				<td class='step-details'>
+						TS_41 is passed - Successfully completed action - Click on Save button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:02 PM</td>
+				<td class='step-details'>
+						TS_42 is passed - Successfully completed action - Wait for load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:03 PM</td>
+				<td class='step-details'>
+						TS_43 is passed - Successfully completed action - Click on button to proceed for Release Payment :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:05 PM</td>
+				<td class='step-details'>
+						TS_44 is passed - Successfully completed action - Wait for load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='fail'>
+				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+				<td class='timestamp'>3:58:07 PM</td>
+				<td class='step-details'>
+						TS_45 is failed - no such element: Unable to locate element: {"method":"xpath","selector":"//a[@id='ctl00_ContentPlaceHolder1_lnkReleasePayment']"}
+  (Session info: chrome=86.0.4240.183)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'IB-SEZ-LAP-571', ip: '192.168.29.97', os.name: 'Windows 10', os.arch: 'x86', os.version: '10.0', java.version: '1.8.0_271'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 86.0.4240.183, chrome: {chromedriverVersion: 86.0.4240.22 (398b0743353ff..., userDataDir: C:\Users\GAURAV~1.JOS\AppDa...}, goog:chromeOptions: {debuggerAddress: localhost:60394}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 36815ff4b6b312cdfbb235fa4d04da20
+*** Element info: {Using=xpath, value=//a[@id='ctl00_ContentPlaceHolder1_lnkReleasePayment']}
+					
+				</td>
+			</tr>
+			<tr class='log' status='fail'>
+				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+				<td class='timestamp'>3:58:07 PM</td>
+				<td class='step-details'>
+						TC12_SPN_LOA_Payment is failed -
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>TC73_SPN_PostFundCancel</span>
+						<span class='test-time'>Nov 5, 2020 03:58:09 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:58:09 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:58:09 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+4ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:58:09 PM</td>
+				<td class='step-details'>
+						TC73_SPN_PostFundCancel is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='8'>
+					<div class='test-heading'>
+						<span class='test-name'>TC15_SPN_ReconSubmission</span>
+						<span class='test-time'>Nov 5, 2020 03:58:10 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:58:10 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:58:10 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+5ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:58:10 PM</td>
+				<td class='step-details'>
+						TC15_SPN_ReconSubmission is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='9'>
+					<div class='test-heading'>
+						<span class='test-name'>TC16_SPN_Accept&Close</span>
+						<span class='test-time'>Nov 5, 2020 03:58:12 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:58:12 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:58:12 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:58:12 PM</td>
+				<td class='step-details'>
+						TC16_SPN_Accept&Close is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='10'>
+					<div class='test-heading'>
+						<span class='test-name'>TC17_MED_Submission</span>
+						<span class='test-time'>Nov 5, 2020 03:58:13 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:58:13 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:17 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 1m 3s+811ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:15 PM</td>
+				<td class='step-details'>
+						TS_01 is passed - Successfully completed action - Open Browser :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:20 PM</td>
+				<td class='step-details'>
+						TS_02 is passed - Successfully completed action - Launch application :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:21 PM</td>
+				<td class='step-details'>
+						TS_03 is passed - Successfully completed action - Provide Username :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:21 PM</td>
+				<td class='step-details'>
+						TS_04 is passed - Successfully completed action - Provide Password :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:23 PM</td>
+				<td class='step-details'>
+						TS_05 is passed - Successfully completed action - Click on Login :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:31 PM</td>
+				<td class='step-details'>
+						TS_06 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:33 PM</td>
+				<td class='step-details'>
+						TS_07 is passed - Successfully completed action - Click Submit New Request button :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:38 PM</td>
+				<td class='step-details'>
+						TS_08 is passed - Successfully completed action - Div load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:40 PM</td>
+				<td class='step-details'>
+						TS_09 is passed - Successfully completed action - Click to select Educational Request :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:42 PM</td>
+				<td class='step-details'>
+						TS_10 is passed - Successfully completed action - wait for page load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:43 PM</td>
+				<td class='step-details'>
+						TS_11 is passed - Successfully completed action - CLick on Proceed button on Request Completion Instruction page :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:57 PM</td>
+				<td class='step-details'>
+						TS_12 is passed - Successfully completed action - Wait for request submission form to load :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:58:58 PM</td>
+				<td class='step-details'>
+						TS_13 is passed - Successfully completed action - Click on Activity Sub Type drop down :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:00 PM</td>
+				<td class='step-details'>
+						TS_14 is passed - Successfully completed action - Select first value from drrop down :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:01 PM</td>
+				<td class='step-details'>
+						TS_15 is passed - Successfully completed action - Click on Therapeutic Area drop down :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:02 PM</td>
+				<td class='step-details'>
+						TS_16 is passed - Successfully completed action -  :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:03 PM</td>
+				<td class='step-details'>
+						TS_17 is passed - Successfully completed action - Select first value from drrop down :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:09 PM</td>
+				<td class='step-details'>
+						TS_18 is passed - Successfully completed action - Wait for dependent field to load : Element to wait appeared and removed in
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:10 PM</td>
+				<td class='step-details'>
+						TS_19 is passed - Successfully completed action - Click on Disease State dropdown :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:11 PM</td>
+				<td class='step-details'>
+						TS_20 is passed - Successfully completed action -  :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:12 PM</td>
+				<td class='step-details'>
+						TS_21 is passed - Successfully completed action - Select first value from drrop down :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:13 PM</td>
+				<td class='step-details'>
+						TS_22 is passed - Successfully completed action - Focus out of the Disease State field :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:14 PM</td>
+				<td class='step-details'>
+						TS_23 is passed - Successfully completed action - Input Program Title :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:14 PM</td>
+				<td class='step-details'>
+						TS_24 is passed - Successfully completed action - Input Program Description :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:14 PM</td>
+				<td class='step-details'>
+						TS_25 is passed - Successfully completed action - Input Decision Requested by Date :
+					
+				</td>
+			</tr>
+			<tr class='log' status='pass'>
+				<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+				<td class='timestamp'>3:59:15 PM</td>
+				<td class='step-details'>
+						TS_26 is passed - Successfully completed action - Select Support Type - Monetary :
+					
+				</td>
+			</tr>
+			<tr class='log' status='fail'>
+				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+				<td class='timestamp'>3:59:17 PM</td>
+				<td class='step-details'>
+						TS_27 is failed - no such element: Unable to locate element: {"method":"xpath","selector":"//input[@id='ctl00_ContentPlaceHolder1_generalinfo1_ddlCurrency_Input']"}
+  (Session info: chrome=86.0.4240.183)
+For documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html
+Build info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'
+System info: host: 'IB-SEZ-LAP-571', ip: '192.168.29.97', os.name: 'Windows 10', os.arch: 'x86', os.version: '10.0', java.version: '1.8.0_271'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 86.0.4240.183, chrome: {chromedriverVersion: 86.0.4240.22 (398b0743353ff..., userDataDir: C:\Users\GAURAV~1.JOS\AppDa...}, goog:chromeOptions: {debuggerAddress: localhost:60448}, javascriptEnabled: true, networkConnectionEnabled: false, pageLoadStrategy: normal, platform: WINDOWS, platformName: WINDOWS, proxy: Proxy(), setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:virtualAuthenticators: true}
+Session ID: 6860bd7d8a0842d9da73d305e22288c2
+*** Element info: {Using=xpath, value=//input[@id='ctl00_ContentPlaceHolder1_generalinfo1_ddlCurrency_Input']}
+					
+				</td>
+			</tr>
+			<tr class='log' status='fail'>
+				<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+				<td class='timestamp'>3:59:17 PM</td>
+				<td class='step-details'>
+						TC17_MED_Submission is failed -
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='11'>
+					<div class='test-heading'>
+						<span class='test-name'>TC43_MED_RAI</span>
+						<span class='test-time'>Nov 5, 2020 03:59:19 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:19 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:19 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+4ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:19 PM</td>
+				<td class='step-details'>
+						TC43_MED_RAI is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='12'>
+					<div class='test-heading'>
+						<span class='test-name'>TC44_MED_RAISubmission</span>
+						<span class='test-time'>Nov 5, 2020 03:59:21 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:21 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:21 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:21 PM</td>
+				<td class='step-details'>
+						TC44_MED_RAISubmission is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='13'>
+					<div class='test-heading'>
+						<span class='test-name'>TC18_MED_ReviewRequest</span>
+						<span class='test-time'>Nov 5, 2020 03:59:22 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:22 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:22 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+5ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:22 PM</td>
+				<td class='step-details'>
+						TC18_MED_ReviewRequest is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='14'>
+					<div class='test-heading'>
+						<span class='test-name'>TC19_MED_Approval</span>
+						<span class='test-time'>Nov 5, 2020 03:59:24 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:24 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:24 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+4ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:24 PM</td>
+				<td class='step-details'>
+						TC19_MED_Approval is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='15'>
+					<div class='test-heading'>
+						<span class='test-name'>TC20_MED_LOA</span>
+						<span class='test-time'>Nov 5, 2020 03:59:25 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:25 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:25 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+4ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:25 PM</td>
+				<td class='step-details'>
+						TC20_MED_LOA is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='16'>
+					<div class='test-heading'>
+						<span class='test-name'>TC21_MED_SignLOA</span>
+						<span class='test-time'>Nov 5, 2020 03:59:27 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:27 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:27 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+4ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:27 PM</td>
+				<td class='step-details'>
+						TC21_MED_SignLOA is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='17'>
+					<div class='test-heading'>
+						<span class='test-name'>TC22_MED_Payment</span>
+						<span class='test-time'>Nov 5, 2020 03:59:29 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:29 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:29 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+4ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:29 PM</td>
+				<td class='step-details'>
+						TC22_MED_Payment is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='18'>
+					<div class='test-heading'>
+						<span class='test-name'>TC53_MED_AmendSubmission</span>
+						<span class='test-time'>Nov 5, 2020 03:59:30 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:30 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:30 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+4ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:30 PM</td>
+				<td class='step-details'>
+						TC53_MED_AmendSubmission is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='19'>
+					<div class='test-heading'>
+						<span class='test-name'>TC54_MED_AmendReview</span>
+						<span class='test-time'>Nov 5, 2020 03:59:31 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:31 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:31 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:31 PM</td>
+				<td class='step-details'>
+						TC54_MED_AmendReview is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='20'>
+					<div class='test-heading'>
+						<span class='test-name'>TC55_MED_AmmendApproval</span>
+						<span class='test-time'>Nov 5, 2020 03:59:33 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:33 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:33 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:33 PM</td>
+				<td class='step-details'>
+						TC55_MED_AmmendApproval is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='21'>
+					<div class='test-heading'>
+						<span class='test-name'>TC56_MED_AmmendLOA</span>
+						<span class='test-time'>Nov 5, 2020 03:59:35 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:35 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:35 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+2ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:35 PM</td>
+				<td class='step-details'>
+						TC56_MED_AmmendLOA is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='22'>
+					<div class='test-heading'>
+						<span class='test-name'>TC57_MED_AmmendSignLOA</span>
+						<span class='test-time'>Nov 5, 2020 03:59:36 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:36 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:36 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+2ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:36 PM</td>
+				<td class='step-details'>
+						TC57_MED_AmmendSignLOA is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='23'>
+					<div class='test-heading'>
+						<span class='test-name'>TC58_MED_AmmendPayment</span>
+						<span class='test-time'>Nov 5, 2020 03:59:38 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:38 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:38 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:38 PM</td>
+				<td class='step-details'>
+						TC58_MED_AmmendPayment is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='24'>
+					<div class='test-heading'>
+						<span class='test-name'>TC59_MED_PostFundCancel</span>
+						<span class='test-time'>Nov 5, 2020 03:59:39 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:39 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:39 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+2ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:39 PM</td>
+				<td class='step-details'>
+						TC59_MED_PostFundCancel is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='25'>
+					<div class='test-heading'>
+						<span class='test-name'>TC23_MED_ReconSubmission</span>
+						<span class='test-time'>Nov 5, 2020 03:59:41 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:41 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:41 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+4ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:41 PM</td>
+				<td class='step-details'>
+						TC23_MED_ReconSubmission is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='26'>
+					<div class='test-heading'>
+						<span class='test-name'>TC24_MED_ReconApprove</span>
+						<span class='test-time'>Nov 5, 2020 03:59:42 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:42 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:42 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:42 PM</td>
+				<td class='step-details'>
+						TC24_MED_ReconApprove is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='27'>
+					<div class='test-heading'>
+						<span class='test-name'>TC51_MED_OutcomeSubmission</span>
+						<span class='test-time'>Nov 5, 2020 03:59:44 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:44 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:44 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:44 PM</td>
+				<td class='step-details'>
+						TC51_MED_OutcomeSubmission is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='28'>
+					<div class='test-heading'>
+						<span class='test-name'>TC52_MED_OutcomesApproval</span>
+						<span class='test-time'>Nov 5, 2020 03:59:45 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:45 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:45 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:45 PM</td>
+				<td class='step-details'>
+						TC52_MED_OutcomesApproval is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='29'>
+					<div class='test-heading'>
+						<span class='test-name'>TC25_MED_Closeout</span>
+						<span class='test-time'>Nov 5, 2020 03:59:47 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>Nov 5, 2020 03:59:47 PM</span>
+	<span class='label end-time'>Nov 5, 2020 03:59:47 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+3ms</span>
+</div>
+<div class='test-steps'>
+	<table class='bordered table-results'>
+		<thead>
+			<tr>
+				<th>Status</th>
+				<th>Timestamp</th>
+				<th>Details</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class='log' status='skip'>
+				<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+				<td class='timestamp'>3:59:47 PM</td>
+				<td class='step-details'>
+						TC25_MED_Closeout is failed - Test case dependency not resolved
+					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<div id='step-filters' class="right sr-filters">
+				<a class="btn-floating waves-effect waves-light green" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></a>
+				<a class="btn-floating waves-effect waves-light red" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></a>
+				<a class="btn-floating waves-effect waves-light red darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></a>
+				<a class="btn-floating waves-effect waves-light pink text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></a>
+				<a class="btn-floating waves-effect waves-light orange" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></a>
+				<a class="btn-floating waves-effect waves-light teal" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></a>
+				<a class="btn-floating waves-effect waves-light grey" status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></a>
+			</div>
+			<h5 class='test-name'></h5>
+		</div>
+	</div>
+	<!-- subview right -->
+</div>
+<!-- test view --><!-- category view --><!-- exception view --><div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Tests
+					<div class='panel-lead'>29</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>0</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>Nov 5, 2020 03:43:43 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>Nov 5, 2020 03:59:48 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>0h 16m 5s+337ms</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->		</div>
+		<!-- container -->
+		<script>
+			var statusGroup = {
+                parentCount: 29,
+				passParent: 5,
+				failParent: 2,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 22,
+				exceptionsParent: 24,
+				childCount: 0,
+				passChild: 0,
+				failChild: 0,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 0,
+				infoChild: 0,
+				debugChild: 0,
+				exceptionsChild: 0,
+				grandChildCount: 0,
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				debugGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		<script>
+			var timeline = {
+			        "TC09_SPN_Submission":217.724,"TC49_SPN_RAI":107.813,"TC50_SPN_RAISubmission":92.491,"TC10_SPN_Review":119.757,"TC11_SPN_Approval":173.28,"TC12_SPN_LOA_Payment":144.053,"TC73_SPN_PostFundCancel":0.004,"TC15_SPN_ReconSubmission":0.005,"TC16_SPN_Accept&Close":0.003,"TC17_MED_Submission":63.811,"TC43_MED_RAI":0.004,"TC44_MED_RAISubmission":0.003,"TC18_MED_ReviewRequest":0.005,"TC19_MED_Approval":0.004,"TC20_MED_LOA":0.004,"TC21_MED_SignLOA":0.004,"TC22_MED_Payment":0.004,"TC53_MED_AmendSubmission":0.004,"TC54_MED_AmendReview":0.003,"TC55_MED_AmmendApproval":0.003,"TC56_MED_AmmendLOA":0.002,"TC57_MED_AmmendSignLOA":0.002,"TC58_MED_AmmendPayment":0.003,"TC59_MED_PostFundCancel":0.002,"TC23_MED_ReconSubmission":0.004,"TC24_MED_ReconApprove":0.003,"TC51_MED_OutcomeSubmission":0.003,"TC52_MED_OutcomesApproval":0.003,"TC25_MED_Closeout":0.003
+			};
+		</script>
+	
+		  <script src='https://cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@ff53917fbbdb5ef820abbbe4d199a6942dc771ff/v3html/js/extent.js' type='text/javascript'></script>
+		<script type='text/javascript'>
+		</script>
+	</body>
+</html>

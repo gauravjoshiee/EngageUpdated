@@ -1,0 +1,5 @@
+929576||TIN|United States|719504584|||TRUE|TRUE||||||||||||||
+457186||TIN|United States|765703893|||TRUE|TRUE||||||||||||||
+383971||TIN|United States|129809938|||TRUE|TRUE||||||||||||||
+614103||TIN|United States|522302467|||TRUE|TRUE||||||||||||||
+226684||TIN|United States|984453426|||TRUE|TRUE||||||||||||||

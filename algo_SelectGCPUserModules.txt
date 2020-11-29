@@ -1,0 +1,10 @@
+for each record in "SelectModules"{
+	click on xPath1;
+	click on xPath2;
+}
+
+for each record in "SelectModuleValues"{
+	click on xPath1;
+	click on xPath2;
+	click on xPath3;
+}
