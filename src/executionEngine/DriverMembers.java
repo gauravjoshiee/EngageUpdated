@@ -57,7 +57,7 @@ public  ActionKeywords actionKeywords;
 	public  String transactionName;
 	public 	String generatedRandomString;
 	
-	public 	ChromeDriver driver;
+	public 	WebDriver driver;
 	public 	static Method method[];
 	public 	ExcelUtils xlObj;
 	public 	Reporting extObj;
