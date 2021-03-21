@@ -31,9 +31,11 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -45,9 +47,11 @@ import org.testng.Assert;
 
 import executionEngine.DriverMembers;
 import executionEngine.DriverScript;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import utility.ExcelUtils;
 //import utility.Logger;
 import utility.readMDMConfig;
+
 
 //import org.openqa.selenium.ie.InternetExplorerDriver;
 @SuppressWarnings("static-access")
@@ -240,7 +244,7 @@ public class ActionKeywords {
 			String listitem="//*[normalize-space(text())='"+data+"']";
 			String xpath=object+listitem;
 			obj.driver.findElement(By.xpath(xpath)).getLocation();
-			obj.driver.findElementByXPath(xpath).click();
+			obj.driver.findElement(By.xpath(xpath)).click();
 			
 			
 			}
@@ -274,7 +278,7 @@ public class ActionKeywords {
 		 */
 		public synchronized void getscreenshot(String object, String data, DriverMembers obj) throws Exception{
 			try{
-			File scrnsht = obj.driver.getScreenshotAs(OutputType.FILE);
+			File scrnsht = ((TakesScreenshot) obj.driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrnsht, new File ("D:\\Automation POC/BVT Automation/RMSDefault_May2017/src/screenshots"+System.currentTimeMillis()+".png"));
 			
 			}
@@ -374,33 +378,24 @@ public class ActionKeywords {
 		
 	public synchronized void openBrowser(String object, String data, DriverMembers obj){
 			
-			try{
-			
-			
-			/*
-			ChromeOptions chromeOptions = new ChromeOptions();
-		    chromeOptions.addArguments("--headless");
-		    */
-//			DesiredCapabilities cap = DesiredCapabilities.chrome();
-//			cap.setCapability("disable-restore-session-state", true);
-//			obj.remotedriver = new RemoteWebDriver (new URL("http://192.168.225.113:5555/wd/hub"),cap);	
-				
-			String Service = System.getProperty("user.dir")+"\\ChromeDriver\\chromeobj.driver.exe";
-			System.setProperty("webobj.driver.chrome.driver", Service);
-
-			obj.driver = new ChromeDriver();
-			obj.driver.manage().deleteAllCookies();
-			obj.driver.manage().window().maximize();
-			obj.driver.manage().timeouts().pageLoadTimeout(Constants.Global_Timeout, TimeUnit. SECONDS);
-			
-			}
-			
-			catch(Exception e){
-				e.printStackTrace();
-				obj.sTestStepFailureDetail=e.getMessage();
-				obj.sTestStepStatus=Constants.Key_Fail_Result;
-				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
-				}
+	  try {
+      if (data.equalsIgnoreCase("chrome")) {
+        WebDriverManager.chromedriver().setup();
+        obj.driver = new ChromeDriver();
+        obj.driver.manage().window().maximize();
+        obj.sTestStepFailureDetail = "Chrome browser started";
+      } else {
+        if (data.equalsIgnoreCase("firefox")) {
+          WebDriverManager.firefoxdriver().setup();
+          obj.driver = new FirefoxDriver();
+          obj.sTestStepFailureDetail = "Firefox driver started";
+        } else {
+          obj.driver = null;
+        }
+      }
+    } catch (Exception e) {
+      System.out.println(e.getLocalizedMessage());
+    }
 			
 		}
 		
@@ -1985,7 +1980,7 @@ public class ActionKeywords {
 			String listitem = "/a[text()='" + data + "']";
 			String xpath = object + listitem;
 			obj.driver.findElement(By.xpath(xpath)).getLocation();
-			obj.driver.findElementByXPath(xpath).click();
+			obj.driver.findElement(By.xpath(xpath)).click();
 
 		} catch (Exception e) {
 			e.printStackTrace();
