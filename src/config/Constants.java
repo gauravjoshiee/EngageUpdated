@@ -4,7 +4,7 @@ public class Constants {
 	
 		//List of System Variables
 		
-		public static String Path_TestData = System.getProperty("user.dir")+"//src//dataEngine//CZ_RMS_TestSuite.xlsx";
+		public static String Path_TestData = System.getProperty("user.dir")+"//src//dataEngine//Engage_Novartis.xlsx";
 		
 		public static final String File_TestResult = "TestSuite";
 		public static final String Path_ReportPath =System.getProperty("user.dir")+"\\Reports\\";
@@ -16,6 +16,7 @@ public class Constants {
 		public static final int Col_TrStatus=2;
 		public static final int Col_TrRunMode=1;
 		public static final int Col_TrName=0;
+	
 		
 		//List of Data Engine Excel sheets
 		public static final String Sheet_SuiteDefinition = "TestSuiteDefinition";
@@ -47,6 +48,7 @@ public class Constants {
 		public static final int Col_TestStepResult=5;
 		public static final int Col_Xpath=6;
 		public static final int Col_Appender=7;
+		public static final int Col_TestStepRunMode= 8;
 		
 		
 		//List of Column Numbers in DataVariables sheet

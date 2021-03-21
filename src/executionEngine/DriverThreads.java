@@ -17,7 +17,7 @@ public class DriverThreads extends Thread{
 	
 	public void run(){
 		
-		String Service = System.getProperty("user.dir")+"\\ChromeDriver\\chromedriver.exe";
+		String Service = System.getProperty("user.dir")+"\\chrome2\\chromedriver.exe";
 		System.setProperty("webdriver.chrome.driver", Service);
 		DriverMembers obj = null;
 		

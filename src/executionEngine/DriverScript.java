@@ -38,6 +38,7 @@ public class DriverScript {
 	public static String sTrRunMode;
 	public static String Path_Executable;
 	public static Thread mTH;
+	public static String sTSRunMode;
 	
 	public static List<Thread> threadList =new ArrayList<>();
 	
@@ -105,7 +106,7 @@ public class DriverScript {
 		Reporting.setExtent();
 		
 		for (int iRow=1;iRow<=sSuiteLength;iRow++){
-			System.out.println(Thread.currentThread().getName()+" - checcking transaction row - "+iRow);
+			System.out.println(Thread.currentThread().getName()+" - checking transaction row - "+iRow);
 			
 			try{
 					ExcelUtils.setExcelFile(Path_Executable, Constants.Sheet_TransactionDefinition);
@@ -215,7 +216,9 @@ public class DriverScript {
 				
 		for (int iRow=1;iRow<=TestLength;iRow++){
 			obj.sTestStepFailureDetail=null;
+	obj.sTSRunMode=obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestStepRunMode,obj.sTestCase,Path_Executable); //commented by ritika
 			
+		if(obj.sTSRunMode.equals("Yes")){
 			try{
 				obj.sActionKeyword = obj.xlObj.getSpecificCellData(iRow, Constants.Col_ActionKeyword,obj.sTestCase,Path_Executable);
 				obj.sPageObject = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Xpath,obj.sTestCase,Path_Executable);
@@ -228,11 +231,20 @@ public class DriverScript {
 				obj.sTestStepFailureDetail="";
 				Log.info("Successfully read step - "+iRow);
 			}
+			
+			catch (NullPointerException e){
+				e.printStackTrace();
+				System.out.println(Thread.currentThread().getName()+" - "+e.getMessage());
+				System.out.println(Thread.currentThread().getName()+" - Test Case not found");
+			}
+    		    
+			
 			catch (Exception e){
 				obj.sTestStepFailureDetail=e.getMessage();
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 			}
-    		    		
+			
+					
     		if(obj.sTestCaseStatus==Constants.Key_Pass_Result){
     			Log.startTestStep(obj.sTestStepName);{
     				execute_Actions(iRow,obj);    				
@@ -244,7 +256,7 @@ public class DriverScript {
 //    			obj.driver.quit();
     			break;
     		}
-    		}
+    		}}
 	}
 	
 	/**This method is to execute test step (Action)
@@ -278,7 +290,7 @@ public class DriverScript {
 					finally {
 						if (obj.sTestStepStatus==Constants.Key_Pass_Result){
 							obj.sTestStepFailureDetail=("Successfully completed action - "+obj.sTestStepDesc+" : "+obj.sTestStepFailureDetail);
-//							obj.xlObj.setStepResult(Constants.Key_Pass_Result,stepnumber, Constants.Col_TestStepResult, obj.sTestCase,obj);
+						//obj.xlObj.setStepResult(Constants.Key_Pass_Result,stepnumber, Constants.Col_TestStepResult, obj.sTestCase,obj);
 						}
 						else{
 //							obj.extObj.addScreencast(obj);

@@ -2,15 +2,14 @@ package executionEngine;
 
 import java.lang.reflect.Method;
 
-
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import config.ActionKeywords;
 import config.Constants;
-import executionEngine.ReadExcelDataWithDynamicColumn;
 import net.sf.json.JSONObject;
 import utility.DBUtils;
 import utility.EmailListner;
@@ -33,6 +32,7 @@ public  ActionKeywords actionKeywords;
 	public int sTestStepNumber;
 	
 	public 	String sRunMode;
+	public String sTSRunMode;
 	
 	public  String sTestCase;
 	public  String sTestIteration;
@@ -68,6 +68,7 @@ public  ActionKeywords actionKeywords;
 	public JSONObject jsonTable1;
 	public JSONObject jsonRow1;
 
+
 	public WebDriver remotedriver;
 	
 	public DriverMembers(){
@@ -82,6 +83,13 @@ public  ActionKeywords actionKeywords;
 		this.jsonRow1 = new JSONObject();
 		String Service = System.getProperty("user.dir")+"\\ChromeDriver\\chromeobj.driver.exe";
 		System.setProperty("webobj.driver.chrome.driver", Service);
+		/*
+		 * ChromeOptions options = new ChromeOptions();
+		 * options.setExperimentalOption("useAutomationExtension", false);
+		 * options.addArguments("start-maximized"); options.addArguments("no-sandbox");
+		 * options.addArguments("disable-extensions"); driver = new
+		 * ChromeDriver(options);
+		 */
 	}
 	
 	

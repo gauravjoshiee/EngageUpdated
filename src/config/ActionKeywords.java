@@ -6,7 +6,17 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,30 +30,35 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import executionEngine.DriverMembers;
 import executionEngine.DriverScript;
 import utility.ExcelUtils;
-import utility.Log;
+//import utility.Logger;
 import utility.readMDMConfig;
 
 //import org.openqa.selenium.ie.InternetExplorerDriver;
 @SuppressWarnings("static-access")
 public class ActionKeywords {
 	
-	
 	public static WebElement form;
 		
 		/**
-		 * This function used to click on a button/ input/ link
-		 * Provide object in test case sheet
+	 * This function used to click on a button/ input/ link Provide object in test
+	 * case sheet
+	 * 
 		 * @param object
 		 * @param data
 		 */
@@ -66,6 +81,7 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
+			//Logger.writeLog(Thread.currentThread().getName() + Thread.currentThread().isAlive());
 			}
 		}
 		
@@ -85,12 +101,13 @@ public class ActionKeywords {
 								counter++;
 							}
 						}
-					}
-					catch (Exception e){
+				} catch (Exception e) {
 						
 							obj.sTestStepFailureDetail="Element to wait appeared and removed in";
-							Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+					//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 							System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
+					//Logger.writeLog(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+					//Logger.writeLog(Thread.currentThread().getName() + Thread.currentThread().isAlive());
 					}
 					break;
 				}
@@ -106,13 +123,14 @@ public class ActionKeywords {
 			}
 			if (!initiate){
 				obj.sTestStepFailureDetail="Element to wait did not appear";
-				Log.info("Element did not appear at - "+object);
+			//Logger.writeLog("Element did not appear at - " + object);
 			}
 						
 			}
 			
 		/**
 		 * This function closes browser session
+	 * 
 		 * @param object
 		 * @param data
 		 */
@@ -143,25 +161,26 @@ public class ActionKeywords {
 				obj.sTestStepFailureDetail=e.getMessage();
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
-				Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
 		
-		/**
-		 * This function is to assert DataVariable value from excel sheet to value of target xpath
-		 * */
-				
+	/**
+	 * This function is to assert DataVariable value from excel sheet to value of
+	 * target xpath
+	 */
+		
 		public synchronized void assertDataVariable(String object, String data, DriverMembers obj){
 				String expectedData="";
 				String actualData = obj.driver.findElement(By.xpath(object)).getText();
 				try{
 					expectedData= obj.xlObj.getDataVariable(Constants.Sheet_DataVariables, data,obj);
 					if (actualData.equals(expectedData)){
-						System.out.println("Actual value - "+actualData+" matches with expected value - "+expectedData+"");
-					}
-					else{
-						obj.sTestStepFailureDetail=("Actual value - "+actualData+" NOT matches with expected value - "+expectedData+"");
+				System.out.println(
+						"Actual value - " + actualData + " matches with expected value - " + expectedData + "");
+			} else {
+				obj.sTestStepFailureDetail = ("Actual value - " + actualData + " NOT matches with expected value - "+ expectedData + "");
 						obj.sTestStepStatus=Constants.Key_Fail_Result;
 						obj.sTestCaseStatus=Constants.Key_Fail_Result;
 					}
@@ -171,13 +190,10 @@ public class ActionKeywords {
 					obj.sTestStepFailureDetail=e.getMessage();
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
-					Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 				}
 				
-			
-			
 		}
-		
 		public synchronized static void inputDataVariable(String object, String data, DriverMembers obj){
 			
 			String value="";
@@ -200,7 +216,7 @@ public class ActionKeywords {
 				obj.sTestStepFailureDetail=e.getMessage();
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
-				Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 			
@@ -210,7 +226,7 @@ public class ActionKeywords {
 		
 		/**
 		 * This function selects from multi select drop down on Charitable request form.
-		 * Provide object and data in test case sheet
+		 * Provide object and data in test case sheet* 
 		 * @param object
 		 * @param data
 		 */
@@ -234,13 +250,14 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				System.out.println(Thread.currentThread().getName()+" - Undable to select from drop down - "+object);
-				Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
 		
 		/**
 		 * This function used to print stack trace if waiting for specific element fails
+	 * 
 		 * @param x
 		 */
 		private void fail(String x){
@@ -248,14 +265,14 @@ public class ActionKeywords {
 		}
 		
 		/**
-		 * This function takes screenshot and saves at defined location
-		 * Currently only appends time stamp. Can be modified to append test step ID/ Description
+	 * This function takes screenshot and saves at defined location Currently only
+	 * appends time stamp. Can be modified to append test step ID/ Description
+	 * 
 		 * @param object
 		 * @param data
 		 * @throws Exception
 		 */
-		public synchronized void getscreenshot(String object, String data, DriverMembers obj) throws Exception
-		{
+		public synchronized void getscreenshot(String object, String data, DriverMembers obj) throws Exception{
 			try{
 			File scrnsht = obj.driver.getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrnsht, new File ("D:\\Automation POC/BVT Automation/RMSDefault_May2017/src/screenshots"+System.currentTimeMillis()+".png"));
@@ -292,7 +309,7 @@ public class ActionKeywords {
 				obj.sTestStepFailureDetail=e.getMessage();
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
-				Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -302,7 +319,7 @@ public class ActionKeywords {
 		 * @param by
 		 * @return
 		 */
-		private boolean isElementPresent(By by, DriverMembers obj) {
+	private static boolean isElementPresent(By by, DriverMembers obj) {
 		    try {
 		      obj.driver.findElement(by);
 		      return true;
@@ -320,11 +337,18 @@ public class ActionKeywords {
 		    }
 		}
 		
-		/**
-		 * This function hits given URL on browser. Provide URL in Constants class. Will be driven through configuration sheet later
-		 * @param object
-		 * @param data
-		 */
+	private boolean isElementSelected(By by, DriverMembers obj) {
+			try {
+			obj.driver.findElement(by).isSelected();
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+			}
+		}
+
+		
+		
+		
 		public synchronized void launchApp(String object, String data, DriverMembers obj){
 			try{
 				
@@ -335,7 +359,7 @@ public class ActionKeywords {
 				obj.sTestStepFailureDetail=e.getMessage();
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
-				Log.info("Launching application failed - "+e.getMessage());
+			//Logger.writeLog("Launching application failed - " + e.getMessage());
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -346,7 +370,9 @@ public class ActionKeywords {
 		 * @param object
 		 * @param data
 		 */
-		public synchronized void openBrowser(String object, String data, DriverMembers obj){
+		
+		
+	public synchronized void openBrowser(String object, String data, DriverMembers obj){
 			
 			try{
 			
@@ -377,6 +403,55 @@ public class ActionKeywords {
 				}
 			
 		}
+		
+	
+		
+		
+		
+		/*
+		
+        public synchronized void openBrowser(String object, String data, DriverMembers obj){
+			
+			try{
+			
+			
+			/*
+			 * ChromeOptions chromeOptions = new ChromeOptions();
+			 * chromeOptions.addArguments("--headless");
+		    */
+//			DesiredCapabilities cap = DesiredCapabilities.chrome();
+//			cap.setCapability("disable-restore-session-state", true);
+			// obj.remotedriver = new RemoteWebDriver (new
+			// URL("http://192.168.225.113:5555/wd/hub"),cap);
+			/*	
+			String Service = System.getProperty("user.dir")+"\\ChromeDriver\\chromeobj.driver.exe";
+			System.setProperty("webobj.driver.chrome.driver", Service);
+			ChromeOptions options = new ChromeOptions();
+			options.setExperimentalOption("useAutomationExtension", false);
+			options.addArguments("start-maximized");
+			options.addArguments("no-sandbox");
+			options.addArguments("disable-extensions");
+			options.addArguments("--disable-notifications");
+			obj.driver = new ChromeDriver(options);
+
+
+			// obj.driver = new ChromeDriver();
+			obj.driver.manage().deleteAllCookies();
+			obj.driver.manage().window().maximize();
+			//((JavascriptExecutor)obj.driver).executeScript("document.body.style.zoom='80%';");
+			obj.driver.manage().timeouts().pageLoadTimeout(Constants.Global_Timeout, TimeUnit. SECONDS);
+			
+			}
+			
+			catch(Exception e){
+				e.printStackTrace();
+				obj.sTestStepFailureDetail=e.getMessage();
+				obj.sTestStepStatus=Constants.Key_Fail_Result;
+				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
+				}
+			
+		}
+		/*
 		
 		/**
 		 * 
@@ -420,14 +495,14 @@ public class ActionKeywords {
 				obj.sTestStepFailureDetail=e.getMessage();
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
-				Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 			catch (Exception e){
 				obj.sTestStepFailureDetail=e.getMessage();
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
-				Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 			}
 		    
 		}
@@ -462,7 +537,7 @@ public class ActionKeywords {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
-					Log.info("Wait got intercepted - "+e.getMessage());
+				//Logger.writeLog("Wait got intercepted - " + e.getMessage());
 					System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 					
 				}
@@ -482,13 +557,14 @@ public class ActionKeywords {
 		    		obj.sTestStepFailureDetail=("Unable to load in "+Constants.Global_Timeout+" seconds");
 		    		obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
-					Log.info("Element not visible within global timeout limit");
+				//Logger.writeLog("Element not visible within global timeout limit");
 		    		break;
 		    		
 		    		
 		    	}
-		    	try { if (isElementPresent(By.xpath(object),obj)){
-		    		Log.info("Element is now visible at - "+object);
+		    	try { 
+                if (isElementPresent(By.xpath(object),obj)){
+					//Logger.writeLog("Element is now visible at - " + object);
 		    		break;
 		    	}
 		    	else{
@@ -500,7 +576,7 @@ public class ActionKeywords {
 					obj.sTestStepFailureDetail=e.getMessage();
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;	
-					Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+				//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 					System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 				}
 		    }
@@ -511,16 +587,16 @@ public class ActionKeywords {
 		    	if (second >= Constants.Global_Timeout) {
 		    		fail("timeout");
 		    		obj.sTestStepStatus=Constants.Key_Fail_Result;
-		    		Log.info("Element not enabled within global timeout limit.");
+				//Logger.writeLog("Element not enabled within global timeout limit.");
 		    		break;
 		    		
 		    		
 		    	}
-		    	try { if (isElementEnabled(By.xpath(object),obj)){
-		    		Log.info("Element is now enabled at - "+object);
+		    	try { 
+                if (isElementEnabled(By.xpath(object),obj)){
+					//Logger.writeLog("Element is now enabled at - " + object);
 		    		break;
-		    	}
-		    	else{
+				} else {
 					Thread.sleep(1000);
 		    	}
 				} catch (Exception e) {
@@ -529,18 +605,23 @@ public class ActionKeywords {
 					obj.sTestStepFailureDetail=e.getMessage();
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
-					Log.info("Event unsuccessful at - "+object+" \\n Error description - "+e.getMessage());
+				//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
 					System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 				}
 		    }
 		}
 		
-		public synchronized static void clickAndSwitchTab(String object, String data, DriverMembers obj){
+	public synchronized static void clickandSwitchTabSF(String object, String data, DriverMembers obj) {
 			try{
 //				Thread.holdsLock(Thread.currentThread());
 				String oldTab=obj.driver.getWindowHandle();
 				System.out.println("Current window handle saved successfully.");
-				obj.driver.findElement(By.xpath(object)).click();
+
+			WebElement ele = obj.driver.findElement(By.xpath(object));
+			JavascriptExecutor executor = (JavascriptExecutor) obj.driver;
+			executor.executeScript("arguments[0].click();", ele);
+
+			//obj.driver.findElement(By.xpath(object)).click();
 				System.out.println("Clicked on element successfully");
 				ArrayList<String> newTab=null;
 				
@@ -560,7 +641,7 @@ public class ActionKeywords {
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
 					obj.sTestStepFailureDetail=e.getMessage();
-					Log.info("Unable to complete window switch");
+			//Logger.writeLog("Unable to complete window switch");
 					System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 				}
 			
@@ -576,7 +657,7 @@ public class ActionKeywords {
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
 					obj.sTestStepFailureDetail=e.getMessage();
-					Log.info("Unable to complete window switch");
+			//Logger.writeLog("Unable to complete window switch");
 					System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 				}
 			
@@ -584,7 +665,19 @@ public class ActionKeywords {
 		
 		public synchronized static void clickOnFrame(String object, String data, DriverMembers obj){
 			try{
+			if (!data.isEmpty()) {
+				String regex = "^[0-9]$";
+				Pattern pattern = Pattern.compile(regex);
+				Matcher matcher = pattern.matcher(data);
+				if (matcher.find()) {
+					int frameIndex = Integer.valueOf(data);
+					obj.driver.switchTo().frame(frameIndex);
+				} else {
 				obj.driver.switchTo().frame(data);				
+				}
+			} else {
+				obj.driver.switchTo().frame(0);
+			}
 				obj.driver.findElement(By.xpath(object)).click();
 				//form.findElement(By.xpath(object)).click();
 				}
@@ -593,7 +686,7 @@ public class ActionKeywords {
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
 					obj.sTestStepFailureDetail=e.getMessage();
-					Log.info("Unable to complete window switch");
+			//Logger.writeLog("Unable to complete window switch");
 					System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 				}
 			
@@ -602,13 +695,12 @@ public class ActionKeywords {
 		public synchronized void resetForm(String object, String data, DriverMembers obj){
 			try{
 				form = null;
-				}
-				catch (Exception e){
+		} catch (Exception e) {
 					e.printStackTrace();
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
 					obj.sTestStepFailureDetail=e.getMessage();
-					Log.info("Unable to complete window switch");
+			//Logger.writeLog("Unable to complete window switch");
 					System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 				}
 			
@@ -629,7 +721,7 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sTestStepFailureDetail=("Unable to click on link having text - "+data);
-				Log.info("Unable to click on link having text - "+data);
+			//Logger.writeLog("Unable to click on link having text - " + data);
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -738,7 +830,7 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sTestStepFailureDetail=("Unable to assert text");
-				Log.info("Unable to assert text");
+			//Logger.writeLog("Unable to assert text");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -755,13 +847,12 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sScreenshotPath=obj.extObj.addScreencast(obj);
-				obj.sTestStepFailureDetail=("Actual data - "+actualText+" does not contain Expected data - "+data+"\n"+obj.sScreenshotPath);
-				Log.info("Unable to assert text");
+				obj.sTestStepFailureDetail = ("Actual data - " + actualText + " does not contain Expected data - "
+						+ data + "\n" + obj.sScreenshotPath);
+				//Logger.writeLog("Unable to assert text");
 				obj.sLocalDataVariable=null;
 			}
-			}
-			catch (Exception e)
-			{
+		} catch (Exception e) {
 				setFailResult(e,obj,"Unablet to assert due to exception");
 			}
 			
@@ -788,17 +879,17 @@ public class ActionKeywords {
 						obj.sTestStepStatus=Constants.Key_Fail_Result;
 						obj.sTestCaseStatus=Constants.Key_Fail_Result;
 						obj.sScreenshotPath=obj.extObj.addScreencast(obj);
-						obj.sTestStepFailureDetail=("Actual data - "+actualText+" does not contain with Expected data - "+value+"\n"+obj.sScreenshotPath);
-						Log.info("Unable to assert text");
-					}
+					obj.sTestStepFailureDetail = ("Actual data - " + actualText
+							+ " does not contain with Expected data - " + value + "\n" + obj.sScreenshotPath);
+					//Logger.writeLog("Unable to assert text");
 				}
-			}
+			}}
 			catch (Exception e){
 				e.printStackTrace();
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sTestStepFailureDetail=("Unable to assert text");
-				Log.info("Unable to assert text");
+			//Logger.writeLog("Unable to assert text");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -815,7 +906,7 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sTestStepFailureDetail=("Unable to fetch alert box text");
-				Log.info("Unable to fetch alert box text");
+			//Logger.writeLog("Unable to fetch alert box text");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -831,7 +922,7 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sTestStepFailureDetail=("Unable to accept from alert box");
-				Log.info("Unable to accept from alert box");
+			//Logger.writeLog("Unable to accept from alert box");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -846,7 +937,7 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sTestStepFailureDetail=("Unable to set data variable context");
-				Log.info("Unable to set data variable context");
+			//Logger.writeLog("Unable to set data variable context");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -858,7 +949,7 @@ public class ActionKeywords {
 			catch (Exception e){
 				e.printStackTrace();
 				obj.sTestStepFailureDetail=("Unable to reset data variable context");
-				Log.info("Unable to reset data variable context");
+			//Logger.writeLog("Unable to reset data variable context");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -873,7 +964,8 @@ public class ActionKeywords {
 			String xpath = null;
 			try{
 				String lookupText=obj.xlObj.getDataVariable(Constants.Sheet_DataVariables, object, obj);
-				xpath=("//*[normalize-space(text())='"+lookupText+"']//parent::*//following-sibling::td["+data+"]//*[text()]");
+			xpath = ("//*[normalize-space(text())='" + lookupText + "']//parent::*//following-sibling::td[" + data
+					+ "]//*[text()]");
 				obj.driver.findElement(By.xpath(xpath)).click();
 			}
 			catch (ElementNotInteractableException ei){
@@ -885,7 +977,7 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sTestStepFailureDetail=("Unable to click on expected link");
-				Log.info("Unable to accept from alert box");
+			//Logger.writeLog("Unable to accept from alert box");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -893,7 +985,8 @@ public class ActionKeywords {
 		public synchronized void getDataFromDynamicRow(String object, String data,DriverMembers obj){
 			try{
 				obj.sLocalDataVariable=null;
-				String containerRow = (object+"//tr[./td[normalize-space(text())='"+obj.sLocalDataVariable+"']]//td["+data+"]//a[text()]");
+			String containerRow = (object + "//tr[./td[normalize-space(text())='" + obj.sLocalDataVariable + "']]//td["
+					+ data + "]//a[text()]");
 				obj.sLocalDataVariable=obj.driver.findElement(By.xpath(containerRow)).getText();
 			}
 			catch (Exception e){
@@ -909,7 +1002,8 @@ public class ActionKeywords {
 		public synchronized void validateDataVariable(String object, String data, DriverMembers obj){
 			try{
 				obj.sLocalDataVariable=null;
-				String containerRow = (object+"//tr[./td[normalize-space(text())='"+obj.sLocalDataVariable+"']]//td["+data+"]//a[text()]");
+			String containerRow = (object + "//tr[./td[normalize-space(text())='" + obj.sLocalDataVariable + "']]//td["
+					+ data + "]//a[text()]");
 				obj.sLocalDataVariable=obj.driver.findElement(By.xpath(containerRow)).getText();
 			}
 			catch (Exception e){
@@ -917,7 +1011,7 @@ public class ActionKeywords {
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
 				obj.sTestStepFailureDetail=("Unable to click on expected link");
-				Log.info("Unable to accept from alert box");
+			//Logger.writeLog("Unable to accept from alert box");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 		}
@@ -926,7 +1020,8 @@ public class ActionKeywords {
 			try{
 				WebDriverWait wait = new WebDriverWait(obj.driver, Constants.Global_Timeout);
 				By item = By.xpath(object);
-				WebElement expected = wait.until(ExpectedConditions.presenceOfElementLocated(item));;
+			WebElement expected = wait.until(ExpectedConditions.presenceOfElementLocated(item));
+			;
 				wait.until(ExpectedConditions.visibilityOf(expected)); 
 				wait.until(ExpectedConditions.elementToBeClickable(expected));
 				
@@ -937,8 +1032,9 @@ public class ActionKeywords {
 			catch (Exception e){
 				e.printStackTrace();
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
-				obj.sTestStepFailureDetail=("Unable to wait for element to be clickable - trying next step"+e.getMessage());
-				Log.info("Unable to wait for element to be clickable");
+			obj.sTestStepFailureDetail = ("Unable to wait for element to be clickable - trying next step"
+					+ e.getMessage());
+			//Logger.writeLog("Unable to wait for element to be clickable");
 				System.out.print(Thread.currentThread().getName()+Thread.currentThread().isAlive());
 			}
 			
@@ -1053,8 +1149,7 @@ public class ActionKeywords {
 		
 		public synchronized static void validateElementPresent(String object, String data, DriverMembers obj){
 			try{
-				boolean isPresent=obj.driver.findElement(By.xpath(object)).isDisplayed();
-				if(isPresent){
+			if (isElementPresent(By.xpath(object),obj)) {
 					System.out.println("Expected element displayed on UI");
 				}
 				else{
@@ -1074,21 +1169,28 @@ public class ActionKeywords {
 		
 		public synchronized static void validateElementNotPresent(String object, String data, DriverMembers obj){
 			try{
-				boolean isPresent=obj.driver.findElement(By.xpath(object)).isDisplayed();
-				if(isPresent){
-					obj.sTestStepFailureDetail=("Element displayed on UI");
+			if(!isElementPresent(By.xpath(object),obj)) {
+				obj.sTestStepFailureDetail = ("Expected element not displayed on UI...");
+				obj.sTestStepStatus = Constants.Key_Pass_Result; 
+				obj.sTestCaseStatus = Constants.Key_Pass_Result;
+				System.out.println("Expected element not displayed on UI"); 	
+			} else {
+				obj.sTestStepFailureDetail = ("Element displayed on UI...");
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
-					System.out.println("Expected element displayed on UI");
-				}
-				else{
-					System.out.println("Element not displayed");
-					
-				}
+				System.out.println("Element displayed on UI..."); 
+			}}
+			catch(NoSuchElementException ne) { 
+				obj.sTestStepFailureDetail= ("Expected element not displayed on UI" + ne.getMessage());
+				obj.sTestStepStatus = Constants.Key_Pass_Result; 
+				obj.sTestCaseStatus = Constants.Key_Pass_Result;
+				System.out.println("Expected element not displayed on UI" + ne.getMessage());
 			}
+
 			catch(Exception e){
 				setFailResult(e,obj,"");
 			}
+        
 		}
 		
 		public synchronized void inputRunConfigValue(String object, String data, DriverMembers obj){
@@ -1131,11 +1233,11 @@ public class ActionKeywords {
 			String inputDataFeed = null;
 			try{
 				obj.xlObj.setExcelFile(obj.sDataFeeder, "DataFeeder");
-				inputDataFeed = obj.xlObj.getSpecificCellData(obj.sCurrentIteration,Integer.parseInt(data),"DataFeeder",obj.sDataFeeder);
+			inputDataFeed = obj.xlObj.getSpecificCellData(obj.sCurrentIteration, Integer.parseInt(data), "DataFeeder",
+					obj.sDataFeeder);
 				obj.driver.findElement(By.xpath(object)).sendKeys(inputDataFeed);
 				obj.xlObj.setExcelFile(DriverScript.Path_Executable, obj.sTestCase);
-			}
-			catch (ElementNotInteractableException ei){
+		} catch (ElementNotInteractableException ei) {
 				try {
 					setScroll(object,obj);
 					obj.driver.findElement(By.xpath(object)).sendKeys(inputDataFeed);
@@ -1143,8 +1245,7 @@ public class ActionKeywords {
 				} catch (Exception e) {
 					setFailResult(e,obj,"");
 				}
-			}
-			catch(Exception e){
+		} catch (Exception e) {
 				setFailResult(e,obj,"");
 			}
 			
@@ -1215,24 +1316,25 @@ public class ActionKeywords {
 
 				String actualColor = String.format("#%02x%02x%02x", hexValue1, hexValue2, hexValue3);
 				if(!actualColor.equalsIgnoreCase(expectedColor)){
-					obj.sTestStepFailureDetail=("Actual color -"+actualColor+" not matches Expected color - "+expectedColor);
+				obj.sTestStepFailureDetail = ("Actual color -" + actualColor + " not matches Expected color - "
+						+ expectedColor);
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 				}
 				else{
-					obj.sTestStepFailureDetail=("Actual color -"+actualColor+" matches Expected color - "+expectedColor);
-				}
-			}
+				obj.sTestStepFailureDetail = ("Actual color -" + actualColor + " matches Expected color - "
+						+ expectedColor);
+				}}
 			catch(Exception e){
 				setFailResult(e,obj,"");
 			}
 		}
 		
-		public synchronized static void mouseHover(String object, String data, DriverMembers obj){
-			Actions actions = new Actions(obj.driver);
-			WebElement target = obj.driver.findElement(By.xpath(object));
-			
-			actions.moveToElement(target).perform();
-		}
+	//	public synchronized static void mouseHover(String object, String data, DriverMembers obj){
+	//		Actions actions = new Actions(obj.driver);
+	//		WebElement target = obj.driver.findElement(By.xpath(object));
+	//		
+	//		actions.moveToElement(target).perform();
+	//	}
 		
 		public synchronized static void setFailResult(Exception e, DriverMembers obj, String customFailureMessage){
 			if (customFailureMessage.isEmpty()){
@@ -1271,7 +1373,784 @@ public class ActionKeywords {
 		public synchronized static void verifyEmailTriggered(String object, String data, DriverMembers obj){
 			obj.emlObj.getMail(obj);
 		}
+        
+      
+	public synchronized static void mouseHover(String object, String data, DriverMembers obj) {
+
+		try {
+			Actions actions = new Actions(obj.driver);
+			WebElement target = obj.driver.findElement(By.xpath(object));
+
+			actions.moveToElement(target).perform();
+		} catch (Exception e) {
+			e.printStackTrace();
+			setFailResult(e, obj, "");
+		}	
+	}
+
+	public synchronized static void performDragAndDrop(String object, String data, DriverMembers obj) throws InterruptedException {
+
+		WebElement from = obj.driver.findElement(By.xpath(data)); 
+		WebElement to = obj.driver.findElement(By.xpath(object)); 
+
+		Actions actions = new Actions(obj.driver);
+
+
+		try {
+			actions.dragAndDrop(from, to).build().perform();
+
+			//			actions.clickAndHold(from).build().perform();
+			//			actions.pause(Duration.ofSeconds(1));
+			//			actions.moveToElement(to).build().perform();	
+			//			//actions.moveByOffset(-1, 0).build().perform();
+			//			actions.pause(Duration.ofSeconds(1));
+			//			actions.release().build().perform();	
+		} catch (Exception e) {
+			e.printStackTrace();
+			setFailResult(e, obj, "");
+		}	
+
+		//				.pause(Duration.ofSeconds(1)) 
+		//				.clickAndHold(element)
+		//				.pause(Duration.ofSeconds(1)) 
+		//				.moveByOffset(1, 0) 
+		//				.moveToElement(target)
+		//				.moveByOffset(1, 0) 
+		//				.pause(Duration.ofSeconds(1)) 
+		//				.release().perform();;
+		//		
+		//		actions.clickAndHold(from).build().perform();
+		//		.waitFor(1).seconds();
+		//		act.moveToElement(to).build().perform();
+		//		Timeout.waitFor(1).seconds();
+		//		act.moveByOffset(-1, -1).build().perform();
+		//		Timeout.waitFor(1).seconds();
+		//		act.release().build().perform();`
+
+	}
+
+	public synchronized static void performDragAndDropJS(String object, String data, DriverMembers obj) throws InterruptedException {
+
+		WebElement From = obj.driver.findElement(By.xpath(data));
+		WebElement To = obj.driver.findElement(By.xpath(object));
+
+		final String java_script =
+				"var src=arguments[0],tgt=arguments[1];var dataTransfer={dropEffe" +
+						"ct:'',effectAllowed:'all',files:[],items:{},types:[],setData:fun" +
+						"ction(format,data){this.items[format]=data;this.types.append(for" +
+						"mat);},getData:function(format){return this.items[format];},clea" +
+						"rData:function(format){}};var emit=function(event,target){var ev" +
+						"t=document.createEvent('Event');evt.initEvent(event,true,false);" +
+						"evt.dataTransfer=dataTransfer;target.dispatchEvent(evt);};emit('" +
+						"dragstart',src);emit('dragenter',tgt);emit('dragover',tgt);emit(" +
+						"'drop',tgt);emit('dragend',src);";
+		try {
+			((JavascriptExecutor)obj.driver).executeScript(java_script, From, To);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setFailResult(e, obj, "");
+		}		
+	}
+
 		
+	public synchronized static void acceptAlert(String object, String data, DriverMembers obj) {
+		try {
+			Alert alert = obj.driver.switchTo().alert(); // switch to alert
+			alert.accept();
+		} catch (Exception e) {
+			e.printStackTrace();
+			setFailResult(e, obj, "");
+		}	
+	}
+
+	public static void clickButtonSalesforce(String object, String data, DriverMembers obj) {
+		try {
+			// this.obj.driver.findElement(By.xpath(OR.getProperty(object))).click();
+			Thread.sleep(1000);
+
+			WebElement ele = obj.driver.findElement(By.xpath(object));
+			JavascriptExecutor executor = (JavascriptExecutor) obj.driver;
+			executor.executeScript("arguments[0].click();", ele);
+
+		} catch (ElementNotInteractableException ei) {
+			setScroll(object, obj);
+			obj.driver.findElement(By.xpath(object)).getLocation();
+			obj.driver.findElement(By.xpath(object)).click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+	}
+
+	public synchronized static void switchToFrame(String object, String data, DriverMembers obj) {
+		try {
+			WebDriverWait wait = new WebDriverWait(obj.driver, 10);
+			WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(object)));
+			obj.driver.switchTo().frame(iframe);
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+	}
+
+	public synchronized static void validateDropDownOptions(String object, String data, DriverMembers obj) {
+		boolean match = false;
+		String[] dataOptions = data.split(",");
+		WebElement dropDown = obj.driver.findElement(By.xpath(object));
+		Select check = new Select(dropDown);
+		List<WebElement> allOptions = check.getOptions();
+		List<String> options = new ArrayList<String>();
+
+		for (WebElement e : allOptions) {
+			options.add(e.getText());
+		}
+
+		if(options.contains(null) || options.contains("")) {
+			options.remove(0);
+		}
+
+		try {
+			if(options.size()==dataOptions.length) {
+				for (int j = 0; j < dataOptions.length; j++) {
+					if (options.contains(dataOptions[j])) {
+						match = true;
+						System.out.println(dataOptions[j] + " " + "- option matches..");
+					} else {
+						match = false;
+						obj.sTestStepStatus = Constants.Key_Fail_Result;
+						obj.sTestCaseStatus = Constants.Key_Fail_Result;
+						obj.sScreenshotPath = obj.extObj.addScreencast(obj);
+						obj.sTestStepFailureDetail = (dataOptions[j] + " " + "- option does not match" + 
+								"\n" + obj.sScreenshotPath);
+						//Logger.writeLog("Unable to assert all dropdown options");
+						Assert.fail(dataOptions[j] + " " + "- option does not match");
+						System.out.println(dataOptions[j] + " " + "- option does not match");
+					}
+				}
+			} else {
+				Assert.fail("Expected & Actual # of options do not match ...");
+				//Logger.writeLog("Expected & Actual # of options do not match ...");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+	}
+
+
+
+	public synchronized void validateElementSelected(String object, String data, DriverMembers obj) {
+
+		try {
+			// boolean isSelected = obj.driver.findElement(By.xpath(object)).isSelected();
+			if (isElementSelected(By.xpath(object), obj)) {
+				System.out.println("Expected element is selected on UI");
+			} else {
+				obj.sTestStepFailureDetail = ("Expected element is not selected on UI");
+				obj.sTestStepStatus = Constants.Key_Fail_Result;
+				obj.sTestCaseStatus = Constants.Key_Fail_Result;
+				System.out.println("Expected element not selected on UI");
+			}
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized static void navigateBack(String object, String data, DriverMembers obj) {
+		obj.driver.navigate().back();
+	}
+
+	// Get The Current Day
+	public synchronized static String getCurrentDay() {
+		// Create a Calendar Object
+		Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+		// Get Current Day as a number
+		int todayInt = calendar.get(Calendar.DAY_OF_MONTH);
+
+		// Integer to String Conversion
+		String todayStr = Integer.toString(todayInt);
+
+		return todayStr;
+	}
+
+	// Selects date in date picker
+	public synchronized static void selectCurrentDate(String object, String data, DriverMembers obj) {
+
+		// Get Today's number
+		String today = getCurrentDay();
+		// date picker table
+		WebElement dateWidgetFrom = obj.driver.findElement(By.xpath(object));
+		// List<WebElement> rows = dateWidgetFrom.findElements(By.tagName("tr"));
+		// columns from date picker table
+		List<WebElement> columns = dateWidgetFrom
+				.findElements(By.xpath("//td[not(contains(@class,'xdsoft_other_month'))]"));
+
+		// Wait for 4 Seconds to see Today's date selected.
+		try {
+			for (WebElement cell : columns) {
+				// Select Today's Date
+				if (cell.getText().equals(today)) {
+					cell.click();
+					break;
+				}
+			}
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public synchronized static void selectAnyDate(String object, String data, DriverMembers obj) {
+
+		// date picker table
+		WebElement dateWidgetFrom = obj.driver.findElement(By.xpath(object));
+		// List<WebElement> rows = dateWidgetFrom.findElements(By.tagName("tr"));
+		// columns from date picker table
+		List<WebElement> columns = dateWidgetFrom.findElements(By.tagName("td"));
+
+		try {
+			for (WebElement cell : columns) {
+				if (cell.getText().equals(data)) {
+					System.out.println(cell.getText());
+					cell.click();
+					break;
+				}
+			}
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public synchronized static String getCurrentMonth() {
+		YearMonth thisMonth = YearMonth.now();
+		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+
+		return thisMonth.format(monthYearFormatter);
+	}
+
+	public synchronized static void validateOptionsOrder(String object, String data, DriverMembers obj) {
+
+		List<String> tabOptions = new ArrayList<String>(Arrays.asList(data.split(",")));
+
+		List<WebElement> originalList = new ArrayList<>(obj.driver.findElements(By.xpath(object)));
+
+		List<String> options = new ArrayList<String>();
+		for (WebElement e : originalList) {
+			options.add(e.getText());
+		}
+
+		try {
+			if (options.size()==tabOptions.size()) {
+				for (int i = 0; i < tabOptions.size(); i++) {
+					if (tabOptions.get(i).replaceAll("\\s", "").equalsIgnoreCase(options.get(i).replaceAll("\\s", ""))) {
+						System.out.println(tabOptions.get(i) + " - displayed in expected order");
+					} else {
+						Assert.fail(tabOptions.get(i) + " - not displayed in expected order");
+					}
+				}
+			} else {
+				Assert.fail("Number of expected and actual options do not match...");
+			}
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+
+
+	}
+
+	public synchronized void validateElementEnabled(String object, String data, DriverMembers obj) {
+
+		try {
+			if (isElementEnabled(By.xpath(object), obj)) {
+				System.out.println("Expected element is enabled on UI");
+			} else {
+				obj.sTestStepFailureDetail = ("Expected element is not enabled on UI");
+				obj.sTestStepStatus = Constants.Key_Fail_Result;
+				obj.sTestCaseStatus = Constants.Key_Fail_Result;
+				System.out.println("Expected element not enabled on UI");
+			}
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized void handleLastCallAccountOption(String object, String data, DriverMembers obj) {
+
+		try {
+			// obj.driver.findElement(By.xpath(data)).click();
+			if (isElementPresent(By.xpath(data), obj)) {
+				if (new WebDriverWait(obj.driver, 20)
+						.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(data))).getAttribute("innerHTML")
+						.contains("Current call is the most recent one for")) {
+					System.out.println("Message displayed on UI - "
+							+ "Current call is the latest call for this account and no last call exists");
+
+				} else {
+					Assert.fail("Message not displayed on UI");
+				}
+
+			} else {
+				Thread.sleep(30000);
+				String oldTab = obj.driver.getWindowHandle();
+				ArrayList<String> newTab = new ArrayList<String>(obj.driver.getWindowHandles());
+				Thread.sleep(5000);
+				newTab.remove(oldTab);
+				obj.driver.switchTo().window(newTab.get(0));
+
+				// WebDriverWait wait = new WebDriverWait(obj.driver, 10);
+				// WebElement iframe =
+				// wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(object)));
+				obj.driver.switchTo().frame(0);
+
+				if (obj.driver.findElement(By.xpath(object)).isDisplayed()) {
+					System.out.println("User is navigated to Last Call page");
+				}
+
+				// Navigate back to call page
+				obj.driver.navigate().back();
+				Thread.sleep(30000);
+				// Switch to frame in call page
+				obj.driver.switchTo().frame(0);
+
+			}
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized void handleNewOrderOption(String object, String data, DriverMembers obj) {
+
+		try {
+			if (isElementPresent(By.xpath(object), obj)) {
+				obj.driver.findElement(By.xpath(object)).click();
+				Thread.sleep(30000);
+				String oldTab = obj.driver.getWindowHandle();
+				ArrayList<String> newTab = new ArrayList<String>(obj.driver.getWindowHandles());
+				Thread.sleep(5000);
+				newTab.remove(oldTab);
+				obj.driver.switchTo().window(newTab.get(0));
+			} else {
+				System.out.println("User is navigated to a new tab");
+				Thread.sleep(30000);
+				String oldTab = obj.driver.getWindowHandle();
+				ArrayList<String> newTab = new ArrayList<String>(obj.driver.getWindowHandles());
+				Thread.sleep(5000);
+				newTab.remove(oldTab);
+
+			}
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized static void switchToPreviousTab(String object, String data, DriverMembers obj) {
+		try {
+
+			ArrayList<String> tabs = new ArrayList<String>(obj.driver.getWindowHandles());
+			System.out.println(tabs.size());
+			// Use the list of window handles to switch between windows
+			obj.driver.switchTo().window(tabs.get(0));
+
+			/*
+			 * //Switch back to original window String mainWindowHandle;
+			 * obj.driver.switchTo().window(mainWindowHandle);
+			 */
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			obj.sTestStepFailureDetail = e.getMessage();
+			//Logger.writeLog("Unable to complete window switch");
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+	}
+
+	public synchronized void handleCallSaveAndSubmit(String object, String data, DriverMembers obj) {
+		try {
+			if (isElementPresent(By.xpath(data), obj)) {
+				obj.driver.findElement(By.xpath(data)).click();
+				Thread.sleep(40000);
+
+				// Verify call is saved and user is navigated to Account page
+				if (isElementPresent(By.xpath(object), obj)) {
+					System.out.println("Call saved successfully & user navigated to account page");
+				} else {
+					Assert.fail("Call save not successful");
+				}
+
+			} else {
+				Thread.sleep(40000);
+
+				// Verify call is saved and user is navigated to Account page
+				if (isElementPresent(By.xpath(object), obj)) {
+					System.out.println("Call saved successfully & user navigated to account page");
+				} else {
+					Assert.fail("Call save not successful");
+				}
+			}
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized void enterQuantity(String object, String data, DriverMembers obj) {
+		try {
+			obj.driver.findElement(By.xpath(object)).click();
+			Thread.sleep(10000);
+
+			obj.driver
+			.findElement(By.xpath(
+					"//div[contains(@class,'number-item backspace')]//button[contains(@class,'btn btn-link')]"))
+			.click();
+			Thread.sleep(5000);
+			obj.driver.findElement(By.xpath("//button[contains(text(),'" + data + "')]")).click();
+			Thread.sleep(5000);
+
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized void handleSampleLimitFeature(String object, String data, DriverMembers obj) {
+		try {
+			if (isElementPresent(By.xpath("//button[contains(text(),'Confirm')]"), obj)) {
+				obj.driver.findElement(By.xpath("//button[contains(text(),'Confirm')]")).click();
+				Thread.sleep(20000);
+
+				if (isElementPresent(By.xpath(data), obj)) {
+					if (new WebDriverWait(obj.driver, 20)
+							.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(data)))
+							.getAttribute("innerHTML").contains("Quantity exceeds sample limits")) {
+						System.out.println(
+								"Message displayed on UI - " + "Sample Limit has reached and Call can not be saved");
+
+					} else {
+						System.out.println("Message not displayed on UI");
+					}
+
+				} else {
+					Thread.sleep(40000);
+					// Verify call is saved and user is navigated to Account page
+					if (isElementPresent(By.xpath(object), obj)) {
+						System.out.println("Sample Limit is allowed and call saved successfully");
+					} else {
+						Assert.fail("Call save not successful");
+					}
+				}
+
+			} else {
+				if (isElementPresent(By.xpath(data), obj)) {
+					if (new WebDriverWait(obj.driver, 20)
+							.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(data)))
+							.getAttribute("innerHTML").contains("Quantity exceeds sample limits")) {
+						System.out.println(
+								"Message displayed on UI - " + "Sample Limit has reached and Call can not be saved");
+
+					} else {
+						System.out.println("Message not displayed on UI");
+					}
+
+				} else {
+					Thread.sleep(40000);
+					// Verify call is saved and user is navigated to Account page
+					if (isElementPresent(By.xpath(object), obj)) {
+						System.out.println("Sample Limit is allowed and call saved successfully");
+					} else {
+						Assert.fail("Call save not successful");
+					}
+				}
+			}
+
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized void handleAddDocumentID(String object, String data, DriverMembers obj) {
+		try {
+			obj.driver.findElement(By.xpath(data)).click();
+			Thread.sleep(10000);
+
+			if (isElementPresent(By.xpath(object), obj)) {
+				obj.driver.findElement(By.xpath(object)).click();
+				Thread.sleep(40000);
+			}
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized void validateErrorMessage(String object, String data, DriverMembers obj) {
+		try {
+			if (isElementPresent(By.xpath(object), obj)) {
+				if (new WebDriverWait(obj.driver, 20)
+						.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(object)))
+						.getAttribute("innerHTML").contains(data)) {
+					System.out.println("Error Message Displayed - " + data);
+
+				} else {
+					System.out.println("Error Message not displayed");
+				}
+
+			}
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized void assertColorLegendPlanner(String object, String data, DriverMembers obj) {
+		try {
+			Thread.sleep(10000);
+
+			String scheduledTime = "//span[contains(text(),'" + data + "')]//following::div[1]";
+			String xpath = object + scheduledTime;
+			obj.driver.findElement(By.xpath(xpath)).click();
+			;
+			// obj.driver.findElementByXPath(xpath).getAttribute();
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized void inputTextRandomString(String object, String data, DriverMembers obj) {
+		try {
+			String inputText = data;
+			if (obj.generatedRandomString == null) {
+				obj.generatedRandomString = String.valueOf(obj.xlObj.randomNumber(1));
+			}
+			String randomString = (inputText + " " + obj.generatedRandomString);
+			obj.driver.findElement(By.xpath(object)).sendKeys(randomString);
+
+		} catch (Exception e) {
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public synchronized static void selectAnyDatePlanner(String object, String data, DriverMembers obj) {
+
+		try {
+			// WebElement element = obj.driver.findElement(By.id(OR.getProperty(object)));
+			// Select drpSelect = new Select(element);
+			// drpSelect.selectByVisibleText(data);
+			Thread.sleep(1000);
+
+			String listitem = "/a[text()='" + data + "']";
+			String xpath = object + listitem;
+			obj.driver.findElement(By.xpath(xpath)).getLocation();
+			obj.driver.findElementByXPath(xpath).click();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(Thread.currentThread().getName() + " - Undable to select from date picker - " + object);
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+	}
+
+	public synchronized static void selectPMCall(String object, String data, DriverMembers obj) {
+
+		try {
+			// WebElement element = obj.driver.findElement(By.id(OR.getProperty(object)));
+			// Select drpSelect = new Select(element);
+			// drpSelect.selectByVisibleText(data);
+			if (obj.driver.findElement(By.xpath(object)).getText().equalsIgnoreCase("AM")) {
+				obj.driver.findElement(By.xpath(object)).click();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(Thread.currentThread().getName() + " - Undable to select from drop down - " + object);
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+	}
+
+	public synchronized static void selectAMCall(String object, String data, DriverMembers obj) {
+
+		try {
+			// WebElement element = obj.driver.findElement(By.id(OR.getProperty(object)));
+			// Select drpSelect = new Select(element);
+			// drpSelect.selectByVisibleText(data);
+			if (obj.driver.findElement(By.xpath(object)).getText().equalsIgnoreCase("PM")) {
+				obj.driver.findElement(By.xpath(object)).click();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.println(Thread.currentThread().getName() + " - Undable to select from drop down - " + object);
+			//Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description - " + e.getMessage());
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+	}
+	
+	public synchronized static void setScrolltoPage(String object, String data, DriverMembers obj) {
+		JavascriptExecutor je = (JavascriptExecutor) obj.driver;
+		WebElement element = obj.driver.findElement(By.xpath(object));
+		je.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+	
+	public static void clickButtonAction(String object, String data, DriverMembers obj) 
+	{
+		try 
+		{
+			// this.obj.driver.findElement(By.xpath(OR.getProperty(object))).click();
+			Thread.sleep(1000);
+			Actions actions = new Actions(obj.driver);
+			WebElement ele = obj.driver.findElement(By.xpath(object));
+			actions.clickAndHold(ele).perform();
+			Thread.sleep(1000);
+			actions.release().perform();
+			//JavascriptExecutor executor = (JavascriptExecutor) obj.driver;
+			//executor.executeScript("arguments[0].click();", ele);
+
+		} catch (ElementNotInteractableException ei) {
+			setScroll(object, obj);
+			obj.driver.findElement(By.xpath(object)).getLocation();
+			obj.driver.findElement(By.xpath(object)).click();
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+	}
+	public synchronized void openBrowserWithoutSecurity(String object, String data, DriverMembers obj) {
+
+		try {
+
+			
+			String Service = System.getProperty("user.dir") + "\\ChromeDriver\\chromeobj.driver.exe";
+			System.setProperty("webobj.driver.chrome.driver", Service);
+			ChromeOptions options = new ChromeOptions();
+			options.setExperimentalOption("useAutomationExtension", false);
+			options.addArguments("start-maximized");
+			options.addArguments("no-sandbox");
+			options.addArguments("disable-extensions");
+			options.addArguments("disable-popup-blocking");
+			options.addArguments("--disable-web-security");
+			obj.driver = new ChromeDriver(options);
+
+
+			// obj.driver = new ChromeDriver();
+			obj.driver.manage().deleteAllCookies();
+			obj.driver.manage().window().maximize();
+			//((JavascriptExecutor)obj.driver).executeScript("document.body.style.zoom='80%';");
+			obj.driver.manage().timeouts().pageLoadTimeout(Constants.Global_Timeout, TimeUnit.SECONDS);
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepFailureDetail = e.getMessage();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+
+	}
+
+	public synchronized static void scrollwithinElement(String object, String data, DriverMembers obj)
+	{
+		JavascriptExecutor je = (JavascriptExecutor) obj.driver;
+		WebElement element = obj.driver.findElement(By.xpath(object));
+		je.executeScript("arguments[0].scrollTo(0, arguments[0].scrollHeight)", element);
+				
+	}	
+
+	public synchronized static void clickAndSwitchTab(String object, String data, DriverMembers obj) {
+		try {
+			//				Thread.holdsLock(Thread.currentThread());
+			String oldTab = obj.driver.getWindowHandle();
+			System.out.println("Current window handle saved successfully.");
+			obj.driver.findElement(By.xpath(object)).getLocation();
+			obj.driver.findElement(By.xpath(object)).click();
+			System.out.println("Clicked on element successfully");
+			ArrayList<String> newTab = null;
+
+			Thread.sleep(5000);
+			newTab = new ArrayList<String>(obj.driver.getWindowHandles());
+
+			newTab.remove(oldTab);
+			// change focus to new tab
+			System.out.println("Trying to switch");
+			obj.driver.switchTo().window(newTab.get(0));
+			System.out.println("Moved to new window handle successfully");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			obj.sTestStepFailureDetail = e.getMessage();
+			//Log.info("Unable to complete window switch");
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		}
+
+	}
+	
+	public synchronized static void scrollTillPageEnd(String object, String data, DriverMembers obj)
+	{
+		JavascriptExecutor je = (JavascriptExecutor) obj.driver;
+		//je.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		je.executeScript("window.scrollTo(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight,document.documentElement.clientHeight));");		
+	}
+	
+
+        
 		public synchronized static void placeMDMTestData(String object, String data, DriverMembers obj){
 			try{
 				obj.mdm.prepareAndTransferMDMFile(obj);
