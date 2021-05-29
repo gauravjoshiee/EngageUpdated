@@ -176,15 +176,15 @@ public class DriverScript {
 								for (int iteration=1;iteration<=obj.sIterationCount;iteration++){
 									obj.sCurrentIteration=iteration;
 									DriverScript.execute_TestCase(obj);
-									obj.extObj.recordTest(obj.sTestCaseStatus, obj.sTestCase,obj.sTestStepFailureDetail, obj.extObj);
+									obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName,obj.sTestStepFailureDetail, obj.extObj, obj.driver);
 								}
 							}
 							else{
-								obj.extObj.recordTest(Constants.Key_Block_Result, obj.sTestCase,"Test case dependency not resolved", obj.extObj);
+								obj.extObj.recordTest(Constants.Key_Block_Result, obj.sTestCase,"Test case dependency not resolved", obj.extObj, obj.driver);
 							}
 						}
 						else{
-							obj.extObj.recordTest(Constants.Key_Block_Result, obj.sTestCase,"No data records in Data Feeder", obj.extObj);
+							obj.extObj.recordTest(Constants.Key_Block_Result, obj.sTestCase,"No data records in Data Feeder", obj.extObj, obj.driver);
 						}
 						DriverScript.setTestCaseResult(iRow,obj,obj.xlObj);
 						System.out.println(Thread.currentThread().getName()+" - Out of execution for - "+obj.sTestCase+" status is "+obj.sTestCaseStatus);
@@ -248,7 +248,7 @@ public class DriverScript {
     		if(obj.sTestCaseStatus==Constants.Key_Pass_Result){
     			Log.startTestStep(obj.sTestStepName);{
     				execute_Actions(iRow,obj);    				
-        			obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName,obj.sTestStepFailureDetail, obj.extObj);
+        			obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName,obj.sTestStepFailureDetail, obj.extObj, obj.driver);
         			obj.sScreenshotPath=null;
     			}
     		}
@@ -343,7 +343,7 @@ public class DriverScript {
     		if(obj.sTestCaseStatus==Constants.Key_Pass_Result){
     			Log.startTestStep(obj.sTestStepName);{
     				execute_Actions(iRow,obj);    				
-        			obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName,obj.sTestStepFailureDetail, obj.extObj);
+    				obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName,obj.sTestStepFailureDetail, obj.extObj, obj);
         			obj.sScreenshotPath=null;
     			}
     		//	Log.endTestStep(obj.sTestStepName);

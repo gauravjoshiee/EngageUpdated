@@ -4,10 +4,11 @@ public class Constants {
 	
 		//List of System Variables
 		
-		public static String Path_TestData = System.getProperty("user.dir")+"//src//dataEngine//Engage_Novartis.xlsx";
+		public static String Path_TestData = System.getProperty("user.dir")+"//src//dataEngine//invoicedemoFailScenario.xlsx";
 		
 		public static final String File_TestResult = "TestSuite";
 		public static final String Path_ReportPath =System.getProperty("user.dir")+"\\Reports\\";
+		public static final boolean Attach_Screenshot = true;
 		public static final String SuiteName = "ITR_MDM";
 		
 		

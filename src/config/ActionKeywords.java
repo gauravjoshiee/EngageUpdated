@@ -457,6 +457,7 @@ public class ActionKeywords {
 			try {
 				Thread.holdsLock(DriverScript.threadList);
 			obj.driver.findElement(By.xpath(object)).click();
+			
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -703,7 +704,7 @@ public class ActionKeywords {
 		public synchronized static void clickLinkHavingText(String object, String data, DriverMembers obj){
 			String xpath = null;
 			try{
-				xpath = (object+"//a[contains(normalize-space(text()),'"+data+"'");
+				xpath = (object+"//a[contains(text(),normalize-space('"+data+"'))]");
 				obj.driver.findElement(By.xpath(xpath)).click();
 			}
 			catch (ElementNotInteractableException ei){
@@ -814,8 +815,7 @@ public class ActionKeywords {
 				else{
 					obj.sTestStepStatus=Constants.Key_Fail_Result;
 					obj.sTestCaseStatus=Constants.Key_Fail_Result;
-					obj.sScreenshotPath=obj.extObj.addScreencast(obj);
-					obj.sTestStepFailureDetail=("Actual data - "+actualText+" does not match with Expected data - "+data+"<br>"+obj.sScreenshotPath);
+					obj.sTestStepFailureDetail=("Actual data - "+actualText+" does not match with Expected data - "+data);
 					
 				}
 			}
@@ -840,10 +840,8 @@ public class ActionKeywords {
 			else{
 				obj.sTestStepStatus=Constants.Key_Fail_Result;
 				obj.sTestCaseStatus=Constants.Key_Fail_Result;
-				obj.sScreenshotPath=obj.extObj.addScreencast(obj);
 				obj.sTestStepFailureDetail = ("Actual data - " + actualText + " does not contain Expected data - "
-						+ data + "\n" + obj.sScreenshotPath);
-				//Logger.writeLog("Unable to assert text");
+						+ data );
 				obj.sLocalDataVariable=null;
 			}
 		} catch (Exception e) {
@@ -872,10 +870,9 @@ public class ActionKeywords {
 					else{
 						obj.sTestStepStatus=Constants.Key_Fail_Result;
 						obj.sTestCaseStatus=Constants.Key_Fail_Result;
-						obj.sScreenshotPath=obj.extObj.addScreencast(obj);
 					obj.sTestStepFailureDetail = ("Actual data - " + actualText
-							+ " does not contain with Expected data - " + value + "\n" + obj.sScreenshotPath);
-					//Logger.writeLog("Unable to assert text");
+							+ " does not contain with Expected data - " + value );
+					
 				}
 			}}
 			catch (Exception e){
@@ -1483,6 +1480,7 @@ public class ActionKeywords {
 		try {
 			WebDriverWait wait = new WebDriverWait(obj.driver, 10);
 			WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(object)));
+			
 			obj.driver.switchTo().frame(iframe);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1519,10 +1517,11 @@ public class ActionKeywords {
 						match = false;
 						obj.sTestStepStatus = Constants.Key_Fail_Result;
 						obj.sTestCaseStatus = Constants.Key_Fail_Result;
-						obj.sScreenshotPath = obj.extObj.addScreencast(obj);
-						obj.sTestStepFailureDetail = (dataOptions[j] + " " + "- option does not match" + 
-								"\n" + obj.sScreenshotPath);
+//						obj.sScreenshotPath = obj.extObj.addScreencast(obj);
+//						obj.sTestStepFailureDetail = (dataOptions[j] + " " + "- option does not match" + 
+//								"\n" + obj.sScreenshotPath);
 						//Logger.writeLog("Unable to assert all dropdown options");
+						obj.sTestStepFailureDetail = (dataOptions[j] + " " + "- option does not match");
 						Assert.fail(dataOptions[j] + " " + "- option does not match");
 						System.out.println(dataOptions[j] + " " + "- option does not match");
 					}
