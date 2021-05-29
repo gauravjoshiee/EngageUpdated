@@ -9,7 +9,7 @@ public class Constants {
 		public static final String File_TestResult = "TestSuite";
 		public static final String Path_ReportPath =System.getProperty("user.dir")+"\\Reports\\";
 		public static final boolean Attach_Screenshot = true;
-		public static final String SuiteName = "ITR_MDM";
+		public static final String SuiteName = "Engage - ";
 		
 		
 		//List of columns in Transaction sheet

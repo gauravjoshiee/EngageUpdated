@@ -1,8 +1,10 @@
 package utility;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -13,28 +15,43 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
 import config.Constants;
 import executionEngine.DriverMembers;
 
-@SuppressWarnings("deprecation")
 public class Reporting {
-	static ExtentHtmlReporter htmlReporter;
+	static ExtentSparkReporter htmlReporter;
 	static ExtentReports extent;
 	ExtentTest test;
-	public static String reportPath;
+	static String reportPath;
+	static Properties p = new Properties();
+
+	static void loadProperties() {
+		try {
+			FileInputStream reader = new FileInputStream((".\\Properties//ExtentProperties.properties"));
+			p.load(reader);
+		} catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (IOException e) {
+			p.clear();
+			System.out.println(e.getMessage());
+		}
+	}
 
 	/**
 	 * This method is for creating a report at specified location
 	 */
 	public static void setExtent() {
 
+		loadProperties();
+
 		String timeStamp = ExcelUtils.getDate("yyyy-MM-dd_HH-mm-ss");
-		reportPath = System.getProperty("user.dir") + "\\Reports\\" + Constants.SuiteName + "_" + timeStamp + ".html";
-		htmlReporter = new ExtentHtmlReporter(reportPath);
+		reportPath = (".\\" + p.getProperty("reportBaseFolder") + "\\" + timeStamp + "\\index.html");
+
+		htmlReporter = new ExtentSparkReporter(reportPath);
 		htmlReporter.config().setDocumentTitle("Automation Report");
-		htmlReporter.config().setReportName(Constants.SuiteName + " - Functional Test Report");
+		htmlReporter.config().setReportName(Constants.SuiteName + "Functional Test Report");
 
 		extent = new ExtentReports();
 		extent.attachReporter(htmlReporter);
@@ -61,10 +78,11 @@ public class Reporting {
 		} else {
 			if (result == Constants.Key_Fail_Result) {
 				extObj.test.log(Status.FAIL, testName + " is failed - " + resultDetail);
-				if (Constants.Attach_Screenshot) {
+				if (p.getProperty("attachScreenshot").equalsIgnoreCase("Yes")) {
 					String path = getScreenshotPath(driver);
 					extObj.test.fail(result, MediaEntityBuilder.createScreenCaptureFromPath(path).build());
 				}
+
 			} else {
 				extObj.test.log(Status.SKIP, testName + " is failed - " + resultDetail);
 			}
@@ -87,17 +105,17 @@ public class Reporting {
 
 	public static String getScreenshotPath(WebDriver driver) throws Exception {
 
-		String dateStamp = new SimpleDateFormat("_yyyy_MM_dd_hh-mm-ss").format(new Date());
+		String timeStamp = ExcelUtils.getDate("yyyy-MM-dd_HH-mm-ss");
 		TakesScreenshot ts = (TakesScreenshot) driver;
 		File rawFile = ts.getScreenshotAs(OutputType.FILE);
 
-		String screenShotFileLocation = System.getProperty("user.dir") + "\\FailedTestsScreenshots\\" + dateStamp
-				+ ".png";
+		String screenShotFileLocation = ".\\" + p.getProperty("reportFailScreenshotFolder") + "\\" + timeStamp
+				+ p.getProperty("reportFailScreenshotFormat");
 
 		File screenShotFile = new File(screenShotFileLocation);
 		FileUtils.copyFile(rawFile, screenShotFile);
 
-		return screenShotFileLocation;
+		return screenShotFile.getCanonicalPath();
 	}
 
 	public static synchronized void addScreencast(DriverMembers obj) throws Exception {
