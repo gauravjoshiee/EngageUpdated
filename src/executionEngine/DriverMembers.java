@@ -16,13 +16,10 @@ import utility.EmailListner;
 import utility.ExcelUtils;
 import utility.Reporting;
 
-
 public class DriverMembers {
-	
-public  ActionKeywords actionKeywords;
-	
-	
-	
+
+	public ActionKeywords actionKeywords;
+
 	public String sActionKeyword;
 	public String sPageObject;
 	public String sPageData;
@@ -30,48 +27,47 @@ public  ActionKeywords actionKeywords;
 	public int sSuiteLength;
 	public int sTestLength;
 	public int sTestStepNumber;
-	
-	public 	String sRunMode;
-	public String sTSRunMode;
-	
-	public  String sTestCase;
-	public  String sTestIteration;
-	public  int sIterationCount;
-	public  int sCurrentIteration;
-	public 	String sDataFeeder;
-	public  String sBlockName;
-	public  String sTestStepName;
-	public  String sTestStepDesc;
-	public  String sStepDependency;
-	public  String sPreviousStepStatus;
-	public  static String sLocalDataVariable;
-	public 	static String sTestStepFailureDetail;
-	public 	static String sBlockFailureDetail;
-	public  String sScreenshotPath;
-	public  String oldTab;
-	public  String sTestCaseStatus=Constants.Key_Pass_Result;
-	public  String sBStatus=Constants.Key_Pass_Result;
-	public  String sTestStepStatus=Constants.Key_Pass_Result;
 
-	public  String sTrRunMode;
-	public  String transactionName;
-	public 	String generatedRandomString;
-	
-	public 	WebDriver driver;
-	public 	static Method method[];
-	public 	ExcelUtils xlObj;
-	public 	Reporting extObj;
-	public 	DBUtils dbObj;
+	public String sRunMode;
+	public String sTSRunMode;
+
+	public String sTestCase;
+	public String sTestIteration;
+	public int sIterationCount;
+	public int sCurrentIteration;
+	public String sDataFeeder;
+	public String sBlockName;
+	public String sTestStepName;
+	public String sTestStepDesc;
+	public String sStepDependency;
+	public String sPreviousStepStatus;
+	public static String sLocalDataVariable;
+	public static String sTestStepFailureDetail;
+	public static String sBlockFailureDetail;
+	public String sScreenshotPath;
+	public String oldTab;
+	public String sTestCaseStatus = Constants.Key_Pass_Result;
+	public String sBStatus = Constants.Key_Pass_Result;
+	public String sTestStepStatus = Constants.Key_Pass_Result;
+
+	public String sTrRunMode;
+	public String transactionName;
+	public String generatedRandomString;
+
+	public WebDriver driver;
+	public static Method method[];
+	public ExcelUtils xlObj;
+	public Reporting extObj;
+	public DBUtils dbObj;
 	public ReadExcelDataWithDynamicColumn mdm;
-	
-	public  EmailListner emlObj;
+
+	public EmailListner emlObj;
 	public JSONObject jsonTable1;
 	public JSONObject jsonRow1;
 
-
 	public WebDriver remotedriver;
-	
-	public DriverMembers(){
+
+	public DriverMembers() {
 		actionKeywords = new ActionKeywords();
 		method = actionKeywords.getClass().getMethods();
 		this.xlObj = new ExcelUtils();
@@ -81,7 +77,7 @@ public  ActionKeywords actionKeywords;
 		this.mdm = new ReadExcelDataWithDynamicColumn();
 		this.jsonTable1 = new JSONObject();
 		this.jsonRow1 = new JSONObject();
-		String Service = System.getProperty("user.dir")+"\\ChromeDriver\\chromeobj.driver.exe";
+		String Service = System.getProperty("user.dir") + "\\ChromeDriver\\chromeobj.driver.exe";
 		System.setProperty("webobj.driver.chrome.driver", Service);
 		/*
 		 * ChromeOptions options = new ChromeOptions();
@@ -91,6 +87,5 @@ public  ActionKeywords actionKeywords;
 		 * ChromeDriver(options);
 		 */
 	}
-	
-	
+
 }

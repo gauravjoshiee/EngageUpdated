@@ -47,24 +47,25 @@ public class DriverScript {
 
 	public static void main(String[] args) throws Exception {
 
-//		Constants.Path_TestData = args[0];
+		// Constants.Path_TestData = args[0];
 
 		Path_Executable = DriverScript.prepareExecutionSuite(Constants.Path_TestData);
 		ExcelUtils mxlObj = new ExcelUtils();
 
 		// Counting test steps in sheet
-//		FileInputStream fs = new FileInputStream(Path_Executable);
-//		XSSFWorkbook workbook = new XSSFWorkbook (fs);
+		// FileInputStream fs = new FileInputStream(Path_Executable);
+		// XSSFWorkbook workbook = new XSSFWorkbook (fs);
 		XSSFSheet sheet = ExcelUtils.setExcelFile(Path_Executable, Constants.Sheet_TransactionDefinition);
 		sSuiteLength = sheet.getLastRowNum();
 
-//		EmailListner.checkMail("pop3.mailtrap.io", "66350086b76120", "a8dc73cd2b2784");
+		// EmailListner.checkMail("pop3.mailtrap.io", "66350086b76120",
+		// "a8dc73cd2b2784");
 
 		DriverScript startEngine = new DriverScript();
 
 		execute_Transaction(startEngine, mxlObj);
 
-//		workbook.close();
+		// workbook.close();
 		for (Thread thread : threadList) {
 			try {
 				thread.join();
@@ -74,7 +75,7 @@ public class DriverScript {
 			}
 		}
 
-//		EmailListner.sendMail();
+		// EmailListner.sendMail();
 
 	}
 
@@ -134,8 +135,8 @@ public class DriverScript {
 
 		boolean noDependency = true;
 
-//		FileInputStream fs = new FileInputStream(Constants.Path_TestData);
-//		XSSFWorkbook workbook1 = new XSSFWorkbook (fs);
+		// FileInputStream fs = new FileInputStream(Constants.Path_TestData);
+		// XSSFWorkbook workbook1 = new XSSFWorkbook (fs);
 		XSSFSheet sheet1 = ExcelUtils.setExcelFile(Path_Executable, Constants.Sheet_SuiteDefinition);
 		obj.sSuiteLength = sheet1.getLastRowNum();
 		// int suiteLength =34;
@@ -207,49 +208,14 @@ public class DriverScript {
 	 */
 	private static void execute_TestCase(DriverMembers obj) throws Exception {
 
-		XSSFSheet sheet2 = ExcelUtils.setExcelFile(Path_Executable, obj.sTestCase);
-		int TestLength = sheet2.getLastRowNum();
+		int TestLength = ScriptHelper.getExecutionCount(Path_Executable, obj.sTestCase);
 
 		System.out.println(
 				Thread.currentThread().getName() + " - Started Execution of test case - " + obj.sTestCase + " ....");
-		Log.startTestCase(obj.sTestCase);
 		obj.sTestCaseStatus = Constants.Key_Pass_Result;
 
 		for (int iRow = 1; iRow <= TestLength; iRow++) {
-			obj.sTestStepFailureDetail = null;
-			obj.sTSRunMode = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestStepRunMode, obj.sTestCase,
-					Path_Executable); // commented by ritika
-
-			if (obj.sTSRunMode.equals("Yes")) {
-				try {
-					obj.sActionKeyword = obj.xlObj.getSpecificCellData(iRow, Constants.Col_ActionKeyword, obj.sTestCase,
-							Path_Executable);
-					obj.sPageObject = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Xpath, obj.sTestCase,
-							Path_Executable);
-					obj.sPageData = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Data, obj.sTestCase,
-							Path_Executable);
-					obj.sTestStepStatus = Constants.Key_Pass_Result;
-					obj.sTestStepNumber = iRow;
-					obj.sTestStepName = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestStepName, obj.sTestCase,
-							Path_Executable);
-					obj.sTestStepDesc = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestDescription,
-							obj.sTestCase, Path_Executable);
-					obj.sAppender = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Appender, obj.sTestCase,
-							Path_Executable);
-					obj.sTestStepFailureDetail = "";
-					Log.info("Successfully read step - " + iRow);
-				}
-
-				catch (NullPointerException e) {
-					e.printStackTrace();
-					System.out.println(Thread.currentThread().getName() + " - " + e.getMessage());
-					System.out.println(Thread.currentThread().getName() + " - Test Case not found");
-				}
-
-				catch (Exception e) {
-					obj.sTestStepFailureDetail = e.getMessage();
-					obj.sTestCaseStatus = Constants.Key_Fail_Result;
-				}
+			ScriptHelper.setStepExecutionData(iRow, obj.sTestCase, obj);
 
 				if (obj.sTestCaseStatus == Constants.Key_Pass_Result) {
 					Log.startTestStep(obj.sTestStepName);
@@ -260,13 +226,13 @@ public class DriverScript {
 						obj.sScreenshotPath = null;
 					}
 				} else {
-//    			obj.driver.quit();
+					// obj.driver.quit();
 					break;
 				}
 			}
-		}
 		obj.driver.quit();
-	}
+		}	
+	
 
 	/**
 	 * This method is to execute test step (Action)
@@ -306,7 +272,7 @@ public class DriverScript {
 						// obj.xlObj.setStepResult(Constants.Key_Pass_Result,stepnumber,
 						// Constants.Col_TestStepResult, obj.sTestCase,obj);
 					} else {
-//							obj.extObj.addScreencast(obj);
+						// obj.extObj.addScreencast(obj);
 						obj.xlObj.setStepResult(Constants.Key_Fail_Result, stepnumber, Constants.Col_TestStepResult,
 								obj.sTestCase, obj);
 
@@ -322,58 +288,33 @@ public class DriverScript {
 
 	public static void execute_Block(String BlockName, DriverMembers obj) throws Exception {
 
-		obj.sBlockName = BlockName;
-		ExcelUtils.setExcelFile(Path_Executable, obj.sBlockName);
-		FileInputStream fs = new FileInputStream(Constants.Path_TestData);
-		XSSFWorkbook workbook2 = new XSSFWorkbook(fs);
-		XSSFSheet sheet3 = workbook2.getSheet(obj.sBlockName);
-		int bLength = sheet3.getLastRowNum();
+		String thisBlockName = BlockName;
+		
+		int bLength = ScriptHelper.getExecutionCount(Path_Executable, thisBlockName);
 
-		System.out.println(
-				Thread.currentThread().getName() + " - Started Execution of block - " + obj.sBlockName + " ....");
-		// Log.startTestCase(obj.sBlockName);
-		obj.sTestCaseStatus = Constants.Key_Pass_Result;
-
-		for (int iRow = 1; iRow <= bLength; iRow++) {
-			obj.sTestStepFailureDetail = null;
-
-			Log.info("Started reading step - " + iRow);
-			try {
-				obj.sActionKeyword = obj.xlObj.getSpecificCellData(iRow, Constants.Col_ActionKeyword, obj.sBlockName,
-						Path_Executable);
-				obj.sPageObject = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Xpath, obj.sBlockName,
-						Path_Executable);
-				obj.sPageData = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Data, obj.sBlockName,
-						Path_Executable);
-				obj.sTestStepStatus = Constants.Key_Pass_Result;
-				obj.sTestStepNumber = iRow;
-				obj.sTestStepName = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestStepName, obj.sBlockName,
-						Path_Executable);
-				obj.sTestStepDesc = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestDescription, obj.sBlockName,
-						Path_Executable);
-				Log.info("Successfully read step - " + iRow);
-			} catch (Exception e) {
-				obj.sBlockFailureDetail = e.getMessage();
-				obj.sBStatus = Constants.Key_Fail_Result;
-				Log.info("Unable to read step - " + iRow);
-			}
-
-			if (obj.sTestCaseStatus == Constants.Key_Pass_Result) {
-				Log.startTestStep(obj.sTestStepName);
-				{
-					execute_Actions(iRow, obj);
-					obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName, obj.sTestStepFailureDetail,
-							obj.extObj, obj.driver);
-					obj.sScreenshotPath = null;
+		if (bLength>0) {
+			System.out.println(
+					Thread.currentThread().getName() + " - Started Execution of block - " + thisBlockName + " ....");
+			obj.sTestCaseStatus = Constants.Key_Pass_Result;
+			for (int iRow = 1; iRow <= bLength; iRow++) {
+				ScriptHelper.setStepExecutionData(iRow, thisBlockName, obj);
+				if (obj.sTestCaseStatus == Constants.Key_Pass_Result) {
+					Log.startTestStep(obj.sTestStepName);
+					{
+						execute_Actions(iRow, obj);
+						obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName, obj.sTestStepFailureDetail,
+								obj.extObj, obj.driver);
+						obj.sScreenshotPath = null;
+					}
+				} else {
+					// obj.driver.quit();
+					break;
 				}
-				// Log.endTestStep(obj.sTestStepName);
-			} else {
-				// obj.driver.quit();
-				break;
-			}
+			} 
 		}
-		workbook2.close();
-
+		else {
+			System.out.println("No steps within mentioned block");
+		}
 	}
 
 	/**
