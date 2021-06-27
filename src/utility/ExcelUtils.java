@@ -2,6 +2,7 @@ package utility;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,12 +39,12 @@ import executionEngine.DriverScript;
         */
        //This method is to read the test data from the Excel cell
        //In this we are passing parameters/arguments as Row Num and Col Num
-       public synchronized static String getCellData(int RowNum, int ColNum, String SheetName) throws Exception{
+       public synchronized String getCellData(int RowNum, int ColNum, String SheetName) throws Exception{
     	   String currentSheet = ExcelWSheet.getSheetName();
     	   if (currentSheet.equalsIgnoreCase(SheetName)){
     	   }
     	   else{
-    		   setExcelFile(DriverScript.Path_Executable,SheetName);
+    		   this.setExcelFile(DriverScript.Path_Executable,SheetName);
     	   }
             DataFormatter formatter = new DataFormatter();
             Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
@@ -69,13 +70,13 @@ import executionEngine.DriverScript;
         * @param SheetName
         * @param Variable
         */
-       public synchronized static String getDataVariable(String SheetName, String Variable, DriverMembers obj){
+       public synchronized String getDataVariable(String SheetName, String Variable, DriverMembers obj){
    			ExcelWSheet = ExcelWBook.getSheet(SheetName);
    			int targetRow;
    			String value="";
    				try{
    					targetRow = getTargetRow(Constants.Sheet_DataVariables, Variable, Constants.Col_DataVariableName);
-   					value= getCellData(targetRow,Constants.Col_DataVariableValue,Constants.Sheet_DataVariables);
+   					value= this.getCellData(targetRow,Constants.Col_DataVariableValue,Constants.Sheet_DataVariables);
    					}
    				
    				catch(Exception e) {
@@ -84,11 +85,11 @@ import executionEngine.DriverScript;
    			return value;
    		}
        
-       public synchronized static void setDataVariable(String SheetName, String Variable, String Value,DriverMembers obj){
+       public synchronized void setDataVariable(String SheetName, String Variable, String Value,DriverMembers obj){
   			ExcelWSheet = ExcelWBook.getSheet(SheetName);
   			try {
 				int targetRow = getTargetRow(Constants.Sheet_DataVariables, Variable, Constants.Col_DataVariableName);
-				setStepResult(Value,targetRow,Constants.Col_DataVariableValue,Constants.Sheet_DataVariables,obj);
+				this.setStepResult(Value,targetRow,Constants.Col_DataVariableValue,Constants.Sheet_DataVariables,obj);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -102,12 +103,12 @@ import executionEngine.DriverScript;
         * @return
         * @throws Exception
         */
-       public synchronized static int getTargetRow(String SheetName, String Variable, int lookUpColumn) throws Exception{
+       public synchronized int getTargetRow(String SheetName, String Variable, int lookUpColumn) throws Exception{
     	   	ExcelWSheet = ExcelWBook.getSheet(SheetName);
    			int targetRow=0;
    			int RowNum = ExcelWSheet.getLastRowNum();
    			for (int i=0;i<=RowNum;i++){
-   				String localVar=getCellData(i,lookUpColumn,SheetName);
+   				String localVar = this.getCellData(i,lookUpColumn,SheetName);
    				if(localVar.equals(Variable)){
    					targetRow = i;	
    				}
@@ -121,11 +122,16 @@ import executionEngine.DriverScript;
         * @param SheetName
         * @throws Exception
         */
-       public synchronized static XSSFSheet setExcelFile(String Path,String SheetName) throws Exception {
-               FileInputStream ExcelFile = new FileInputStream(Path);
-               ExcelWBook = new XSSFWorkbook(ExcelFile);
-               ExcelWSheet = ExcelWBook.getSheet(SheetName);
-               return ExcelWSheet;
+       public synchronized XSSFSheet setExcelFile(String path,String sheetName) throws Exception {
+               
+    	   try (FileInputStream excelFile = new FileInputStream(path)) {
+				ExcelWBook = new XSSFWorkbook(excelFile);
+				   ExcelWSheet = ExcelWBook.getSheet(sheetName);
+				   
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	   return ExcelWSheet;
        }
        
        /**
@@ -137,9 +143,9 @@ import executionEngine.DriverScript;
         * @throws Exception
         */
 
-       public synchronized static void setStepResult(String Result,  int RowNum, int ColNum, String SheetName, DriverMembers obj) throws Exception{
+       public synchronized void setStepResult(String Result,  int RowNum, int ColNum, String SheetName, DriverMembers obj) throws Exception{
        	   try{
-       		   ExcelUtils.setExcelFile(DriverScript.Path_Executable, SheetName);
+       		   this.setExcelFile(DriverScript.Path_Executable, SheetName);
        		   ExcelWSheet = ExcelWBook.getSheet(SheetName);
        		   
        		   Row R = ExcelWSheet.getRow(RowNum);
@@ -234,11 +240,11 @@ import executionEngine.DriverScript;
        }
        
        @SuppressWarnings("finally")
-       public synchronized static String getRunConfig(String Variable){
+       public synchronized String getRunConfig(String Variable){
     	   
   			String runValue=null;
     	   try{
-    		    ExcelUtils.setExcelFile(DriverScript.Path_Executable, Constants.Sheet_RunConfig);
+    		    this.setExcelFile(DriverScript.Path_Executable, Constants.Sheet_RunConfig);
   				int targetRow = getTargetRow(Constants.Sheet_RunConfig, Variable, Constants.Col_RunConfigName);
   				runValue = getCellData(targetRow,Constants.Col_RunConfigValue,Constants.Sheet_RunConfig);
   			}
@@ -256,12 +262,12 @@ import executionEngine.DriverScript;
     	   }
   		}
        
-       public synchronized static void updateRunConfig(String Variable, String Value, DriverMembers obj){
+       public synchronized void updateRunConfig(String Variable, String Value, DriverMembers obj){
  			
    	   try{
- 				int targetRow = getTargetRow(Constants.Sheet_RunConfig, Variable, Constants.Col_RunConfigName);
+ 				int targetRow = this.getTargetRow(Constants.Sheet_RunConfig, Variable, Constants.Col_RunConfigName);
  				if(targetRow>0){
- 					setStepResult(Value,targetRow,Constants.Col_RunConfigValue,Constants.Sheet_RunConfig,obj);
+ 					this.setStepResult(Value,targetRow,Constants.Col_RunConfigValue,Constants.Sheet_RunConfig,obj);
  				}
  				else{
  					obj.sTestStepFailureDetail="RunConfig Key "+Variable+" not found to store random email - "+Value;
@@ -285,61 +291,61 @@ import executionEngine.DriverScript;
        }
        
        
-       public synchronized static String getSpecificCellData(int RowNum, int ColNum, String SheetName, String filePath) throws Exception{
+       public synchronized String getSpecificCellData(int rowNum, int colNum, String sheetName, String filePath) throws Exception{
     	   String currentSheet = ExcelWSheet.getSheetName();
-    	   if (currentSheet.equalsIgnoreCase(SheetName)){
+    	   if (currentSheet.equalsIgnoreCase(sheetName)){
     	   }
     	   else{
-    		   setExcelFile(filePath,SheetName);
+    		   setExcelFile(filePath, sheetName);
     	   }
             DataFormatter formatter = new DataFormatter();
-            Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
-            String CellData="";
+            Cell = ExcelWSheet.getRow(rowNum).getCell(colNum);
+            String cellData="";
             if (Cell==null){
               return "";
             }
             else{
             	if (Cell.getCellType().equals(CellType.FORMULA)){
          		   if(Cell.getCachedFormulaResultType().equals(CellType.NUMERIC)){
-         			  CellData = Double.toString(Cell.getNumericCellValue());
+         			  cellData = Double.toString(Cell.getNumericCellValue());
          		   }
          		  if(Cell.getCachedFormulaResultType().equals(CellType.STRING)){
-         			  CellData = Cell.getStringCellValue();
+         			 cellData = Cell.getStringCellValue();
          		   }
             	}
             	else{
-          		   CellData = formatter.formatCellValue(ExcelWSheet.getRow(RowNum).getCell(ColNum));
+            		cellData = formatter.formatCellValue(ExcelWSheet.getRow(rowNum).getCell(colNum));
             	}
             }
-            return CellData;
+            return cellData;
         }
  
-       public synchronized static String getCellReferenceFromLOVSummary(int RowNum, int ColNum, String SheetName, String filePath) throws Exception{
+       public synchronized String getCellReferenceFromLOVSummary(int rowNum, int colNum, String sheetName, String filePath) throws Exception{
     	   String currentSheet = ExcelWSheet.getSheetName();
-    	   if (!currentSheet.equalsIgnoreCase(SheetName)){
-    		   setExcelFile(filePath,SheetName);
+    	   if (!currentSheet.equalsIgnoreCase(sheetName)){
+    		   this.setExcelFile(filePath, sheetName);
     	   }
             DataFormatter formatter = new DataFormatter();
-            Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
-            String CellData="";
+            Cell = ExcelWSheet.getRow(rowNum).getCell(colNum);
+            String cellData="";
             XSSFHyperlink h = Cell.getHyperlink();
-            if (!(h==null)){
+            if (h != null){
             
             	String location=(Cell.getHyperlink().getLocation());
             	
             	if (location.contains("'")){
-            	CellData = location.substring(location.indexOf("'") + 1, location.indexOf("'!"));
+            		cellData = location.substring(location.indexOf("'") + 1, location.indexOf("'!"));
             	}
             	else {
             		if(location.contains("!")){
-            			CellData = location.substring(0, location.indexOf("!"));
+            			cellData = location.substring(0, location.indexOf("!"));
             		}
             		else{
-            			CellData = location;
+            			cellData = location;
             		}
             	}
             }
-            return CellData;
+            return cellData;
         }
        
        

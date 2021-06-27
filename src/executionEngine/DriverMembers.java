@@ -42,7 +42,7 @@ public class DriverMembers {
 	public String sStepDependency;
 	public String sPreviousStepStatus;
 	public static String sLocalDataVariable;
-	public static String sTestStepFailureDetail;
+	public String sTestStepFailureDetail;
 	public static String sBlockFailureDetail;
 	public String sScreenshotPath;
 	public String oldTab;
@@ -77,15 +77,6 @@ public class DriverMembers {
 		this.mdm = new ReadExcelDataWithDynamicColumn();
 		this.jsonTable1 = new JSONObject();
 		this.jsonRow1 = new JSONObject();
-		String Service = System.getProperty("user.dir") + "\\ChromeDriver\\chromeobj.driver.exe";
-		System.setProperty("webobj.driver.chrome.driver", Service);
-		/*
-		 * ChromeOptions options = new ChromeOptions();
-		 * options.setExperimentalOption("useAutomationExtension", false);
-		 * options.addArguments("start-maximized"); options.addArguments("no-sandbox");
-		 * options.addArguments("disable-extensions"); driver = new
-		 * ChromeDriver(options);
-		 */
 	}
 
 }

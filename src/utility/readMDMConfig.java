@@ -29,8 +29,9 @@ public class readMDMConfig {
 	static Map <String,String> fieldSequence;
 	
 	public static void setMDMConfigFilePath() throws Exception{
-		ExcelUtils.setExcelFile(DriverScript.Path_Executable, Constants.Sheet_RunConfig);
-		configFilePath = ExcelUtils.getRunConfig("MDMConfigPath");
+		ExcelUtils xlObj = new ExcelUtils();
+		xlObj.setExcelFile(DriverScript.Path_Executable, Constants.Sheet_RunConfig);
+		configFilePath = xlObj.getRunConfig("MDMConfigPath");
 	}
 	
 	
@@ -72,8 +73,9 @@ public class readMDMConfig {
 	}
 	
 	public static void writeFile() throws Exception{
+		ExcelUtils xlObj = new ExcelUtils();
 		setMDMConfigFilePath();
-		ExcelUtils.setExcelFile(configFilePath, "Source files");
+		xlObj.setExcelFile(configFilePath, "Source files");
 		allRequiredFiles();
 		System.out.println("FoundAllFiles");
 		knowColumnNumberInFiles();
@@ -100,14 +102,16 @@ public class readMDMConfig {
 //	}
 	
 	public static void knowColumnNumberInFiles() throws Exception{
-		int rowCount = ExcelUtils.setExcelFile(configFilePath, "Source files").getLastRowNum();
+		ExcelUtils xlObj = new ExcelUtils();
+		int rowCount = xlObj.setExcelFile(configFilePath, "Source files").getLastRowNum();
 		for (int i=1;i<=rowCount;i++){
-			columnNumbers.put(ExcelUtils.getCellData(i, 0, "Source files"), ExcelUtils.getCellData(i, 5, "Source files"));
+			columnNumbers.put(xlObj.getCellData(i, 0, "Source files"), xlObj.getCellData(i, 5, "Source files"));
 		}
 	}
 	
 	public static void knowFileDelimiter(String fileName) throws Exception{
-				switch (ExcelUtils.getCellData(ExcelUtils.getTargetRow("Source files", fileName, 0), 4, "Source files")){
+		ExcelUtils xlObj = new ExcelUtils();
+				switch (xlObj.getCellData(xlObj.getTargetRow("Source files", fileName, 0), 4, "Source files")){
 				case "Pipe":
 					delimiter = "|";
 				case "comma":
@@ -116,10 +120,11 @@ public class readMDMConfig {
 	}
 	
 	public static void allRequiredFiles() throws Exception{
-		int rowCount = ExcelUtils.setExcelFile(configFilePath, "Source files").getLastRowNum();
+		ExcelUtils xlObj = new ExcelUtils();
+		int rowCount = xlObj.setExcelFile(configFilePath, "Source files").getLastRowNum();
 		allRequiredFiles = new String[rowCount];
 		for (int i=1;i<=rowCount;i++){
-			allRequiredFiles[i-1]= ExcelUtils.getSpecificCellData(i, 0, "Source files",configFilePath);
+			allRequiredFiles[i-1]= xlObj.getSpecificCellData(i, 0, "Source files",configFilePath);
 		}
 	}
 }

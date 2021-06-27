@@ -1,7 +1,6 @@
 package executionEngine;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -10,10 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import config.ActionKeywords;
 import config.Constants;
@@ -49,28 +44,23 @@ public class DriverScript {
 
 		// Constants.Path_TestData = args[0];
 
-		Path_Executable = DriverScript.prepareExecutionSuite(Constants.Path_TestData);
+		Path_Executable = ScriptHelper.prepareExecutionSuite(Constants.Path_TestData);
 		ExcelUtils mxlObj = new ExcelUtils();
 
-		// Counting test steps in sheet
-		// FileInputStream fs = new FileInputStream(Path_Executable);
-		// XSSFWorkbook workbook = new XSSFWorkbook (fs);
-		XSSFSheet sheet = ExcelUtils.setExcelFile(Path_Executable, Constants.Sheet_TransactionDefinition);
-		sSuiteLength = sheet.getLastRowNum();
+		sSuiteLength = ScriptHelper.getExecutionCount(Path_Executable, Constants.Sheet_TransactionDefinition);
 
 		// EmailListner.checkMail("pop3.mailtrap.io", "66350086b76120",
 		// "a8dc73cd2b2784");
 
 		DriverScript startEngine = new DriverScript();
 
-		execute_Transaction(startEngine, mxlObj);
-
-		// workbook.close();
+		executeTransaction(startEngine, mxlObj);
 		for (Thread thread : threadList) {
 			try {
 				thread.join();
 				System.out.println(thread.getName() + " Finished its job");
 			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
 				System.out.println("Interrupted Exception thrown by : " + thread.getName());
 			}
 		}
@@ -93,14 +83,14 @@ public class DriverScript {
 		method = actionKeywords.getClass().getMethods();
 	}
 
-	public static void execute_Transaction(DriverScript x, ExcelUtils xlObj) {
+	public static void executeTransaction(DriverScript x, ExcelUtils xlObj) throws IOException {
 		Reporting.setExtent();
 
 		for (int iRow = 1; iRow <= sSuiteLength; iRow++) {
 			System.out.println(Thread.currentThread().getName() + " - checking transaction row - " + iRow);
 
 			try {
-				ExcelUtils.setExcelFile(Path_Executable, Constants.Sheet_TransactionDefinition);
+				xlObj.setExcelFile(Path_Executable, Constants.Sheet_TransactionDefinition);
 				sTrRunMode = xlObj.getSpecificCellData(iRow, Constants.Col_TrRunMode,
 						Constants.Sheet_TransactionDefinition, Path_Executable);
 				if (sTrRunMode.equals("Yes")) {
@@ -118,7 +108,6 @@ public class DriverScript {
 				System.out.println(Thread.currentThread().getName() + " - " + e.getMessage());
 				System.out.println(Thread.currentThread().getName() + " - " + "Test Case not found");
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -131,71 +120,11 @@ public class DriverScript {
 	 * 
 	 * @throws Exception
 	 */
-	public void execute_TestSuite(DriverMembers obj) throws Exception {
+	public void executeTestSuite(DriverMembers obj) throws Exception {
 
-		boolean noDependency = true;
-
-		// FileInputStream fs = new FileInputStream(Constants.Path_TestData);
-		// XSSFWorkbook workbook1 = new XSSFWorkbook (fs);
-		XSSFSheet sheet1 = ExcelUtils.setExcelFile(Path_Executable, Constants.Sheet_SuiteDefinition);
-		obj.sSuiteLength = sheet1.getLastRowNum();
-		// int suiteLength =34;
-
+		obj.sSuiteLength = ScriptHelper.getExecutionCount(Path_Executable, Constants.Sheet_SuiteDefinition);
 		for (int iRow = 1; iRow <= obj.sSuiteLength; iRow++) {
-			System.out.println(Thread.currentThread().getName() + " - checking suite row - " + iRow);
-			try {
-				String transactionMap = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Transaction,
-						Constants.Sheet_SuiteDefinition, Path_Executable);
-				if (transactionMap.equalsIgnoreCase(obj.transactionName)) {
-					obj.sRunMode = obj.xlObj.getSpecificCellData(iRow, Constants.Col_RunMode,
-							Constants.Sheet_SuiteDefinition, Path_Executable);
-					if (obj.sRunMode.equals("Yes")) {
-						obj.sTestCase = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestCasName,
-								Constants.Sheet_SuiteDefinition, Path_Executable);
-						obj.sIterationCount = 1;
-						obj.sTestIteration = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestCaseIteration,
-								Constants.Sheet_SuiteDefinition, Path_Executable);
-
-						if (obj.sTestIteration.equalsIgnoreCase("Yes")) {
-							obj.sDataFeeder = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestCaseDataFeeder,
-									Constants.Sheet_SuiteDefinition, Path_Executable);
-							if (obj.sDataFeeder.equals("")) {
-								System.out.println("Data feeder file path not provided");
-							} else {
-								XSSFSheet feeder = ExcelUtils.setExcelFile(obj.sDataFeeder, "DataFeeder");
-								obj.sIterationCount = feeder.getLastRowNum();
-							}
-						}
-						obj.extObj.startTest(obj.sTestCase, obj.extObj);
-						noDependency = checkDependency(iRow, obj, obj.xlObj);
-						if (obj.sIterationCount > 0) {
-							if (noDependency) {
-
-								for (int iteration = 1; iteration <= obj.sIterationCount; iteration++) {
-									obj.sCurrentIteration = iteration;
-									DriverScript.execute_TestCase(obj);
-									obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName,
-											obj.sTestStepFailureDetail, obj.extObj, obj.driver);
-								}
-							} else {
-								obj.extObj.recordTest(Constants.Key_Block_Result, obj.sTestCase,
-										"Test case dependency not resolved", obj.extObj, obj.driver);
-							}
-						} else {
-							obj.extObj.recordTest(Constants.Key_Block_Result, obj.sTestCase,
-									"No data records in Data Feeder", obj.extObj, obj.driver);
-						}
-						DriverScript.setTestCaseResult(iRow, obj, obj.xlObj);
-						System.out.println(Thread.currentThread().getName() + " - Out of execution for - "
-								+ obj.sTestCase + " status is " + obj.sTestCaseStatus);
-					}
-				}
-			} catch (NullPointerException e) {
-				e.printStackTrace();
-				System.out.println(Thread.currentThread().getName() + " - " + e.getMessage());
-				System.out.println(Thread.currentThread().getName() + " - Test Case not found");
-			}
-
+			processTestCaseRunModeAndProceed(iRow, obj);
 		}
 
 	}
@@ -206,38 +135,40 @@ public class DriverScript {
 	 * 
 	 * @throws Exception
 	 */
-	private static void execute_TestCase(DriverMembers obj) throws Exception {
+	private static void executeTestCase(String executionSheet, DriverMembers obj) throws Exception {
 
-		int TestLength = ScriptHelper.getExecutionCount(Path_Executable, obj.sTestCase);
+		int executionLength = ScriptHelper.getExecutionCount(Path_Executable, executionSheet);
 
 		System.out.println(
-				Thread.currentThread().getName() + " - Started Execution of test case - " + obj.sTestCase + " ....");
+				Thread.currentThread().getName() + " - Started Execution of test case - " + executionSheet + " ....");
 		obj.sTestCaseStatus = Constants.Key_Pass_Result;
 
-		for (int iRow = 1; iRow <= TestLength; iRow++) {
-			ScriptHelper.setStepExecutionData(iRow, obj.sTestCase, obj);
+		for (int iRow = 1; iRow <= executionLength; iRow++) {
 
-				if (obj.sTestCaseStatus == Constants.Key_Pass_Result) {
-					Log.startTestStep(obj.sTestStepName);
-					{
-						execute_Actions(iRow, obj);
-						obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName, obj.sTestStepFailureDetail,
-								obj.extObj, obj.driver);
-						obj.sScreenshotPath = null;
-					}
+			if (obj.sTestCaseStatus == Constants.Key_Pass_Result) {
+				ScriptHelper.setStepExecutionData(iRow, executionSheet, obj);
+				Log.startTestStep(obj.sTestStepName);
+				if (obj.sActionKeyword.equals("executeFunctionalBlock")) {
+					executeTestCase(obj.sPageData, obj);
 				} else {
-					// obj.driver.quit();
-					break;
+					executeActions(iRow, executionSheet, obj);
+
+					obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName, obj.sTestStepFailureDetail,
+							obj.extObj, obj.driver);
+					obj.sScreenshotPath = null;
 				}
+			} else {
+				break;
 			}
-		obj.driver.quit();
-		}	
-	
+		}
+		// Do not use driver.quit within execute_TestCase as it is recursive function
+	}
 
 	/**
 	 * This method is to execute test step (Action)
 	 */
-	private static void execute_Actions(int stepnumber, DriverMembers obj) throws Exception {
+	private static void executeActions(int stepnumber, String executionSheet, DriverMembers obj) throws Exception {
+		obj.sTestCase = executionSheet;
 
 		// This is a loop which will run for the number of actions in the Action Keyword
 		// class
@@ -245,13 +176,13 @@ public class DriverScript {
 		// number of methods
 		for (int i = 0; i < method.length; i++) {
 
-			// This is now comparing the method name with the ActionKeyword value got from
+			// Comparing the method name with the ActionKeyword value got from
 			// excel
 			if (obj.method[i].getName().equals(obj.sActionKeyword)) {
 				Log.info("Started action - " + obj.sActionKeyword);
 				// In case of match found, it will execute the matched method
 				try {
-					System.out.println(Thread.currentThread().getName() + " - " + obj.sTestCase + " - Executing: "
+					System.out.println(Thread.currentThread().getName() + " - " + executionSheet + " - Executing: "
 							+ obj.sTestStepDesc);
 					obj.method[i].invoke(obj.actionKeywords, obj.sPageObject, obj.sPageData, obj);
 					Log.info("Completed action - " + obj.sActionKeyword);
@@ -269,13 +200,9 @@ public class DriverScript {
 					if (obj.sTestStepStatus == Constants.Key_Pass_Result) {
 						obj.sTestStepFailureDetail = ("Successfully completed action - " + obj.sTestStepDesc + " : "
 								+ obj.sTestStepFailureDetail);
-						// obj.xlObj.setStepResult(Constants.Key_Pass_Result,stepnumber,
-						// Constants.Col_TestStepResult, obj.sTestCase,obj);
 					} else {
-						// obj.extObj.addScreencast(obj);
 						obj.xlObj.setStepResult(Constants.Key_Fail_Result, stepnumber, Constants.Col_TestStepResult,
-								obj.sTestCase, obj);
-
+								executionSheet, obj);
 					}
 				}
 				// Once any method is executed, this break statement will take the flow outside
@@ -286,60 +213,29 @@ public class DriverScript {
 
 	}
 
-	public static void execute_Block(String BlockName, DriverMembers obj) throws Exception {
-
-		String thisBlockName = BlockName;
-		
-		int bLength = ScriptHelper.getExecutionCount(Path_Executable, thisBlockName);
-
-		if (bLength>0) {
-			System.out.println(
-					Thread.currentThread().getName() + " - Started Execution of block - " + thisBlockName + " ....");
-			obj.sTestCaseStatus = Constants.Key_Pass_Result;
-			for (int iRow = 1; iRow <= bLength; iRow++) {
-				ScriptHelper.setStepExecutionData(iRow, thisBlockName, obj);
-				if (obj.sTestCaseStatus == Constants.Key_Pass_Result) {
-					Log.startTestStep(obj.sTestStepName);
-					{
-						execute_Actions(iRow, obj);
-						obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName, obj.sTestStepFailureDetail,
-								obj.extObj, obj.driver);
-						obj.sScreenshotPath = null;
-					}
-				} else {
-					// obj.driver.quit();
-					break;
-				}
-			} 
-		}
-		else {
-			System.out.println("No steps within mentioned block");
-		}
-	}
-
 	/**
 	 * This method sets result of test case in Test Suite sheet. Not intended for
 	 * Extent Reports
 	 */
-	private synchronized static void setTestCaseResult(int TestCaseRow, DriverMembers obj, ExcelUtils xlObj) {
+	private static synchronized void setTestCaseResult(int testCaseRow, DriverMembers obj, ExcelUtils xlObj) {
 		try {
 
 			if (obj.sTestCaseStatus == Constants.Key_Pass_Result) {
-				xlObj.setStepResult(Constants.Key_Pass_Result, TestCaseRow, Constants.Col_TestCaseResult,
+				xlObj.setStepResult(Constants.Key_Pass_Result, testCaseRow, Constants.Col_TestCaseResult,
 						Constants.Sheet_SuiteDefinition, obj);
 			} else {
 				if (obj.sTestCaseStatus == Constants.Key_Fail_Result) {
-					xlObj.setStepResult(Constants.Key_Fail_Result, TestCaseRow, Constants.Col_TestCaseResult,
+					xlObj.setStepResult(Constants.Key_Fail_Result, testCaseRow, Constants.Col_TestCaseResult,
 							Constants.Sheet_SuiteDefinition, obj);
 				} else {
-					xlObj.setStepResult(Constants.Key_Block_Result, TestCaseRow, Constants.Col_TestCaseResult,
+					xlObj.setStepResult(Constants.Key_Block_Result, testCaseRow, Constants.Col_TestCaseResult,
 							Constants.Sheet_SuiteDefinition, obj);
 				}
 			}
 			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			Date date = new Date();
 			String timeStamp = String.valueOf(dateFormat.format(date));
-			xlObj.setStepResult(timeStamp, TestCaseRow, Constants.Col_TestCaseTime, Constants.Sheet_SuiteDefinition,
+			xlObj.setStepResult(timeStamp, testCaseRow, Constants.Col_TestCaseTime, Constants.Sheet_SuiteDefinition,
 					obj);
 
 		} catch (Exception e) {
@@ -348,10 +244,10 @@ public class DriverScript {
 
 	}
 
-	private boolean checkDependency(int TestCaseRow, DriverMembers obj, ExcelUtils xlObj) {
+	private boolean checkDependency(int testCaseRow, DriverMembers obj, ExcelUtils xlObj) {
 		try {
 
-			String dependentTC = xlObj.getSpecificCellData(TestCaseRow, Constants.Col_Dependency,
+			String dependentTC = xlObj.getSpecificCellData(testCaseRow, Constants.Col_Dependency,
 					Constants.Sheet_SuiteDefinition, Path_Executable);
 			if (dependentTC != "") {
 				int parentRow = xlObj.getTargetRow(Constants.Sheet_SuiteDefinition, dependentTC,
@@ -373,20 +269,84 @@ public class DriverScript {
 		}
 	}
 
-	public static String prepareExecutionSuite(String sourcePath) throws Exception {
-		// below line is just to append the date format with the screenshot name to
-		// avoid duplicate names
-		String dateName = new SimpleDateFormat("yyyy_MMM_dd_hhmmss").format(new Date());
+	private void processTestCaseRunModeAndProceed(int iRow, DriverMembers obj) throws Exception {
+		System.out.println(Thread.currentThread().getName() + " - checking suite row - " + iRow);
+		try {
+			String transactionMap = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Transaction,
+					Constants.Sheet_SuiteDefinition, Path_Executable);
+			if (transactionMap.equalsIgnoreCase(obj.transactionName)) {
+				obj.sRunMode = obj.xlObj.getSpecificCellData(iRow, Constants.Col_RunMode,
+						Constants.Sheet_SuiteDefinition, Path_Executable);
+				if (obj.sRunMode.equals("Yes")) {
+					processTestCaseDependencyAndProceed(iRow, obj);
+				}
+			}
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			System.out.println(Thread.currentThread().getName() + " - " + e.getMessage());
+			System.out.println(Thread.currentThread().getName() + " - Test Case not found");
+		}
+	}
 
-		File source = new File(sourcePath);
-		// after execution, you could see a folder "FailedTestsScreenshots" under src
-		// folder
-		String destination = System.getProperty("user.dir") + "\\ExecutedSuite\\" + "ExecutedTest_" + dateName
-				+ ".xlsx";
-		File finalDestination = new File(destination);
-		FileUtils.copyFile(source, finalDestination);
-		// Returns the captured file path
-		return destination;
+	private int processTestCaseDataFeeder(int iRow, DriverMembers obj) {
+		int totalRecordCount = 0;
+		try {
+
+			String isTestIterable = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestCaseIteration,
+					Constants.Sheet_SuiteDefinition, Path_Executable);
+
+			if (isTestIterable.equalsIgnoreCase("Yes")) {
+				//Enhance code to use a data members hashmap of testCase<Key>, DataFeederPath<value> to facilitate multiple level of data feeder use
+				obj.sDataFeeder = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestCaseDataFeeder,
+						Constants.Sheet_SuiteDefinition, Path_Executable);
+				if (obj.sDataFeeder.equals("")) {
+					System.out.println("Data feeder file path not provided");
+				} else {
+					totalRecordCount = ScriptHelper.getExecutionCount(obj.sDataFeeder, "DataFeeder");
+				}
+			} else {
+				totalRecordCount = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return totalRecordCount;
+	}
+
+	private void processTestCaseDependencyAndProceed(int iRow, DriverMembers obj) {
+		try {
+			boolean noDependency = true;
+			noDependency = checkDependency(iRow, obj, obj.xlObj);
+			String targetExecutionTest = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestCasName,
+					Constants.Sheet_SuiteDefinition, Path_Executable);
+			if (noDependency) {
+				int totalFeederRecords = processTestCaseDataFeeder(iRow, obj);
+				if (totalFeederRecords > 0) {
+
+					for (int iteration = 1; iteration <= totalFeederRecords; iteration++) {
+						obj.extObj.startTest(targetExecutionTest, obj.extObj);
+						obj.sCurrentIteration = iteration;
+						DriverScript.executeTestCase(targetExecutionTest, obj);
+						obj.extObj.recordTest(obj.sTestStepStatus, obj.sTestStepName, obj.sTestStepFailureDetail,
+								obj.extObj, obj.driver);
+					}
+				} else {
+					obj.extObj.recordTest(Constants.Key_Block_Result, obj.sTestCase, "No data records in Data Feeder",
+							obj.extObj, obj.driver);
+				}
+			}else {
+				obj.extObj.recordTest(Constants.Key_Block_Result, obj.sTestCase,
+						"Test case dependency not resolved", obj.extObj, obj.driver);
+			} 
+			DriverScript.setTestCaseResult(iRow, obj, obj.xlObj);
+			System.out.println(Thread.currentThread().getName() + " - Out of execution for - " + targetExecutionTest
+					+ " status is " + obj.sTestCaseStatus);
+			if (obj.driver != null) {
+				obj.driver.quit();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

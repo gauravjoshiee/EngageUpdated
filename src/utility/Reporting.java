@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -27,9 +28,9 @@ public class Reporting {
 	static String reportPath;
 	static Properties p = new Properties();
 
-	static void loadProperties() {
-		try {
-			FileInputStream reader = new FileInputStream((".\\Properties//ExtentProperties.properties"));
+	static void loadProperties() throws IOException {
+
+		try (FileInputStream reader = new FileInputStream((".\\Properties//ExtentProperties.properties"))) {
 			p.load(reader);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
@@ -41,8 +42,10 @@ public class Reporting {
 
 	/**
 	 * This method is for creating a report at specified location
+	 * 
+	 * @throws IOException
 	 */
-	public static void setExtent() {
+	public static void setExtent() throws IOException {
 
 		loadProperties();
 
@@ -73,12 +76,16 @@ public class Reporting {
 	public synchronized void recordTest(String result, String testName, String resultDetail, Reporting extObj,
 			WebDriver driver) throws Exception {
 
-		if (result == Constants.Key_Pass_Result) {
+		if (result.equalsIgnoreCase(Constants.Key_Pass_Result)) {
 			extObj.test.log(Status.PASS, testName + " is passed - " + resultDetail);
 		} else {
-			if (result == Constants.Key_Fail_Result) {
+			String callingFunction = Thread.currentThread().getStackTrace()[2].getMethodName();
+			if (result.equalsIgnoreCase(Constants.Key_Fail_Result)) {
 				extObj.test.log(Status.FAIL, testName + " is failed - " + resultDetail);
-				if (p.getProperty("attachScreenshot").equalsIgnoreCase("Yes")) {
+				// Taking screenshot only if extent report property states Yes and the record
+				// test is called at test case level, not at test suite level
+				if (p.getProperty("attachScreenshot").equalsIgnoreCase("Yes")
+						&& callingFunction.equals("execute_TestCase")) {
 					String path = getScreenshotPath(driver);
 					extObj.test.fail(result, MediaEntityBuilder.createScreenCaptureFromPath(path).build());
 				}

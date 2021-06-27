@@ -1,9 +1,13 @@
 package executionEngine;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -13,54 +17,62 @@ import utility.Log;
 
 public class ScriptHelper {
 
-	public static int getExecutionCount(String FilePath, String SheetName) {
+	public static String prepareExecutionSuite(String sourcePath) throws IOException {
 
-		FileInputStream fs;
+		String dateName = new SimpleDateFormat("yyyy_MMM_dd_hhmmss").format(new Date());
+
+		File source = new File(sourcePath);
+
+		String preparedPath = System.getProperty("user.dir") + "\\ExecutedSuite\\" + "ExecutedTest_" + dateName
+				+ ".xlsx";
+		File preparedFile = new File(preparedPath);
+		FileUtils.copyFile(source, preparedFile);
+		// Returns the captured file path
+		return preparedPath;
+	}
+
+	public static int getExecutionCount(String filePath, String sheetName) {
+
 		XSSFWorkbook workbook;
 		XSSFSheet worksheet;
 		int rowCount = 0;
-		try {
-			fs = new FileInputStream(FilePath);
+		try (FileInputStream fs = new FileInputStream(filePath)) {
+
 			workbook = new XSSFWorkbook(fs);
-			worksheet = workbook.getSheet(SheetName);
+			worksheet = workbook.getSheet(sheetName);
 			rowCount = worksheet.getLastRowNum();
 			workbook.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return rowCount;
 	}
 
-	@SuppressWarnings("static-access")
-	public static void setStepExecutionData(int iRow, String SheetName, DriverMembers obj) {
+	public static void setStepExecutionData(int iRow, String sheetName, DriverMembers obj) {
 		obj.sTestStepFailureDetail = null;
 		obj.sTestCaseStatus = Constants.Key_Pass_Result;
 		try {
-			obj.sTSRunMode = ExcelUtils.getSpecificCellData(iRow, Constants.Col_TestStepRunMode, obj.sTestCase,
+			obj.sTSRunMode = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestStepRunMode, sheetName,
 					DriverScript.Path_Executable);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
 		if (obj.sTSRunMode.equals("Yes")) {
 			try {
-				obj.sActionKeyword = ExcelUtils.getSpecificCellData(iRow, Constants.Col_ActionKeyword, obj.sTestCase,
+				obj.sActionKeyword = obj.xlObj.getSpecificCellData(iRow, Constants.Col_ActionKeyword, sheetName,
 						DriverScript.Path_Executable);
-				obj.sPageObject = ExcelUtils.getSpecificCellData(iRow, Constants.Col_Xpath, obj.sTestCase,
+				obj.sPageObject = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Xpath, sheetName,
 						DriverScript.Path_Executable);
-				obj.sPageData = ExcelUtils.getSpecificCellData(iRow, Constants.Col_Data, obj.sTestCase,
+				obj.sPageData = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Data, sheetName,
 						DriverScript.Path_Executable);
 				obj.sTestStepStatus = Constants.Key_Pass_Result;
 				obj.sTestStepNumber = iRow;
-				obj.sTestStepName = ExcelUtils.getSpecificCellData(iRow, Constants.Col_TestStepName, obj.sTestCase,
+				obj.sTestStepName = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestStepName, sheetName,
 						DriverScript.Path_Executable);
-				obj.sTestStepDesc = ExcelUtils.getSpecificCellData(iRow, Constants.Col_TestDescription, obj.sTestCase,
+				obj.sTestStepDesc = obj.xlObj.getSpecificCellData(iRow, Constants.Col_TestDescription, sheetName,
 						DriverScript.Path_Executable);
-				obj.sAppender = ExcelUtils.getSpecificCellData(iRow, Constants.Col_Appender, obj.sTestCase,
+				obj.sAppender = obj.xlObj.getSpecificCellData(iRow, Constants.Col_Appender, sheetName,
 						DriverScript.Path_Executable);
 				obj.sTestStepFailureDetail = "";
 				Log.info("Successfully read step - " + iRow);

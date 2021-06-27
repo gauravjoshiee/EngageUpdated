@@ -54,11 +54,11 @@ public class MDMFilePrepare {
 			
 			//Identifying which record has source sequence equal to current sequence (current sequence auto-increment after successful writing of file)
 			for (int i=1;i<=sourceLength;i++){
-				int processingSequence = Integer.valueOf(obj.xlObj.getSpecificCellData(i, 4,"Sources",configPath));
+				int processingSequence = Integer.parseInt(obj.xlObj.getSpecificCellData(i, 4,"Sources",configPath));
 				if(processingSequence==currentSequence){
 					//Setting a list of files to be created for source having current sequence
 //					processingFileList.clear();
-					String currentSourceName = ExcelUtils.getSpecificCellData(i, 0, "Sources", configPath);
+					String currentSourceName = obj.xlObj.getSpecificCellData(i, 0, "Sources", configPath);
 					getFileListForSource(currentSourceName,obj);
 					processFieldMap();
 					writeFlatFile(obj);
@@ -76,13 +76,13 @@ public class MDMFilePrepare {
 	
 	public static void getFileListForSource(String sourceName,DriverMembers obj){
 		try{
-		sheet = ExcelUtils.setExcelFile(configPath, "Source files");
+		sheet = obj.xlObj.setExcelFile(configPath, "Source files");
 		int sourceFileLength = sheet.getLastRowNum();
 		for(int j=1;j<=sourceFileLength;j++){
-			String processingSourceName = ExcelUtils.getSpecificCellData(j, 0, "Source files", configPath);
+			String processingSourceName = obj.xlObj.getSpecificCellData(j, 0, "Source files", configPath);
 			if(processingSourceName.equals(sourceName)){
-				String processingFileName = ExcelUtils.getSpecificCellData(j, 1, "Source files", configPath);
-				int filePipeCount = Integer.valueOf(ExcelUtils.getSpecificCellData(j, 6, "Source files", configPath));
+				String processingFileName = obj.xlObj.getSpecificCellData(j, 1, "Source files", configPath);
+				int filePipeCount = Integer.parseInt(obj.xlObj.getSpecificCellData(j, 6, "Source files", configPath));
 				processingFileList.add(processingFileName);
 				pipeCount.put(processingFileName, filePipeCount);
 				obj.jsonTable1.put(processingFileName, "");
@@ -98,19 +98,21 @@ public class MDMFilePrepare {
 	
 	public static void processFieldMap(){
 		try {
-			sheet = ExcelUtils.setExcelFile(configPath, "Source files field mappings");
+			ExcelUtils xlObj = new ExcelUtils();
+			String fieldMapSheetName = "Source files field mappings";
+			sheet = xlObj.setExcelFile(configPath, fieldMapSheetName);
 			int fieldMapLength = sheet.getLastRowNum();
 			for (String currentFileName:processingFileList){
 				Map<Integer,String> currentFileHash=new HashMap<Integer,String>();
 				for (int k=1;k<=fieldMapLength;k++){
-					String processingFileName = ExcelUtils.getSpecificCellData(k, 1, "Source files field mappings", configPath);
+					String processingFileName = xlObj.getSpecificCellData(k, 1, fieldMapSheetName, configPath);
 					if (processingFileName.equals(currentFileName)){
 						int fieldMappingLength = getColumnsCount(sheet);
 						for (int l=fieldMapStartColumn;l<=fieldMappingLength;l++){
-							String columnValue = ExcelUtils.getSpecificCellData(k, l, "Source files field mappings", configPath);
+							String columnValue = xlObj.getSpecificCellData(k, l, fieldMapSheetName, configPath);
 							if(!columnValue.isEmpty()){
 								int columnPlace = Integer.valueOf(columnValue);
-								String columnHeader = ExcelUtils.getSpecificCellData(sheet.getTopRow(), l, "Source files field mappings", configPath);
+								String columnHeader = xlObj.getSpecificCellData(sheet.getTopRow(), l, fieldMapSheetName, configPath);
 								if(!currentFileHash.containsKey(columnPlace)){
 									currentFileHash.put(columnPlace, columnHeader);
 								}
@@ -309,7 +311,8 @@ public class MDMFilePrepare {
     	boolean listFound = false;
     	String item="";
     	try {
-			sheet = ExcelUtils.setExcelFile(configPath, "List of values");
+    		ExcelUtils xlObj = new ExcelUtils();
+			sheet = xlObj.setExcelFile(configPath, "List of values");
 			int columnCount = getColumnsCount(sheet);
 			int topRowNumber = sheet.getFirstRowNum();
 			Row topRow = sheet.getRow(topRowNumber);

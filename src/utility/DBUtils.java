@@ -69,12 +69,13 @@ public class DBUtils {
   }
 
   private static void getExpectedToggleSetting(DriverMembers obj) throws Exception {
-    String filePath = ExcelUtils.getRunConfig("RMSSystemConfigPath");
-    String sheetName = ExcelUtils.getRunConfig("ToggleSettingSheetName");
+	  ExcelUtils xlObj = new ExcelUtils();
+    String filePath = xlObj.getRunConfig("RMSSystemConfigPath");
+    String sheetName = xlObj.getRunConfig("ToggleSettingSheetName");
     System.out.println("Filepath - " + filePath);
     System.out.println("Toggle sheet Name - " + sheetName);
     // int targetrow = ExcelUtils.getTargetRow(sheetName, toggleName, 1);
-    int sourceLength = ExcelUtils.setExcelFile(filePath, sheetName).getLastRowNum();
+    int sourceLength = xlObj.setExcelFile(filePath, sheetName).getLastRowNum();
     expectedToggleSetting.clear();
     for (int i = 1; i <= sourceLength; i++) {
       String Key = obj.xlObj.getSpecificCellData(i, 1, sheetName, filePath);
@@ -373,11 +374,12 @@ public class DBUtils {
   }
 
   public DBUtils() {
-    dbServer = ExcelUtils.getRunConfig("dbServer");
-    dbServerInstance = ExcelUtils.getRunConfig("dbServerInstance");
-    dbName = ExcelUtils.getRunConfig("dbName");
-    dbUser = ExcelUtils.getRunConfig("dbUser");
-    dbPassword = ExcelUtils.getRunConfig("dbPassword");
+	  ExcelUtils xlObj = new ExcelUtils();
+    dbServer = xlObj.getRunConfig("dbServer");
+    dbServerInstance = xlObj.getRunConfig("dbServerInstance");
+    dbName = xlObj.getRunConfig("dbName");
+    dbUser = xlObj.getRunConfig("dbUser");
+    dbPassword = xlObj.getRunConfig("dbPassword");
   }
 
 }

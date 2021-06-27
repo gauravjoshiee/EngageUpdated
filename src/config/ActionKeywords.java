@@ -51,11 +51,10 @@ import utility.ExcelUtils;
 //import utility.Logger;
 import utility.readMDMConfig;
 
-//import org.openqa.selenium.ie.InternetExplorerDriver;
 @SuppressWarnings("static-access")
 public class ActionKeywords {
 
-	public static WebElement form;
+	static WebElement form;
 
 	/**
 	 * This function used to click on a button/ input/ link Provide object in test
@@ -66,7 +65,6 @@ public class ActionKeywords {
 	 */
 	public static void click_button(String object, String data, DriverMembers obj) {
 		try {
-			// this.obj.driver.findElement(By.xpath(OR.getProperty(object))).click();
 			Thread.sleep(1000);
 			obj.driver.findElement(By.xpath(object)).getLocation();
 			obj.driver.findElement(By.xpath(object)).click();
@@ -105,13 +103,7 @@ public class ActionKeywords {
 				} catch (Exception e) {
 
 					obj.sTestStepFailureDetail = "Element to wait appeared and removed in";
-					// Logger.writeLog("Event unsuccessful at - " + object + " \\n Error description
-					// - " + e.getMessage());
 					System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
-					// Logger.writeLog(Thread.currentThread().getName() +
-					// Thread.currentThread().isAlive());
-					// Logger.writeLog(Thread.currentThread().getName() +
-					// Thread.currentThread().isAlive());
 				}
 				break;
 			} else {
@@ -125,7 +117,6 @@ public class ActionKeywords {
 		}
 		if (!initiate) {
 			obj.sTestStepFailureDetail = "Element to wait did not appear";
-			// Logger.writeLog("Element did not appear at - " + object);
 		}
 
 	}
@@ -199,7 +190,7 @@ public class ActionKeywords {
 
 	}
 
-	public synchronized static void inputDataVariable(String object, String data, DriverMembers obj) {
+	public static synchronized void inputDataVariable(String object, String data, DriverMembers obj) {
 
 		String value = "";
 		try {
@@ -234,7 +225,7 @@ public class ActionKeywords {
 	 * @param object
 	 * @param data
 	 */
-	public synchronized static void drpdwnSelect(String object, String data, DriverMembers obj) {
+	public static synchronized void drpdwnSelect(String object, String data, DriverMembers obj) {
 		try {
 			// WebElement element = obj.driver.findElement(By.id(OR.getProperty(object)));
 			// Select drpSelect = new Select(element);
@@ -449,7 +440,7 @@ public class ActionKeywords {
 	 * 
 	 * @param data
 	 */
-	public synchronized static void uploadByRobot(String object, String data, DriverMembers obj) {
+	public static synchronized void uploadByRobot(String object, String data, DriverMembers obj) {
 		try {
 			Thread.holdsLock(DriverScript.threadList);
 			obj.driver.findElement(By.xpath(object)).click();
@@ -496,7 +487,7 @@ public class ActionKeywords {
 
 	}
 
-	public synchronized static void uploadRunConfig(String object, String data, DriverMembers obj) {
+	public static synchronized void uploadRunConfig(String object, String data, DriverMembers obj) {
 		try {
 			String inputPath = obj.xlObj.getRunConfig(data);
 			uploadByRobot(object, inputPath, obj);
@@ -598,7 +589,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void clickandSwitchTabSF(String object, String data, DriverMembers obj) {
+	public static synchronized void clickandSwitchTabSF(String object, String data, DriverMembers obj) {
 		try {
 			// Thread.holdsLock(Thread.currentThread());
 			String oldTab = obj.driver.getWindowHandle();
@@ -647,7 +638,7 @@ public class ActionKeywords {
 
 	}
 
-	public synchronized static void clickOnFrame(String object, String data, DriverMembers obj) {
+	public static synchronized void clickOnFrame(String object, String data, DriverMembers obj) {
 		try {
 			if (!data.isEmpty()) {
 				String regex = "^[0-9]$";
@@ -689,7 +680,7 @@ public class ActionKeywords {
 
 	}
 
-	public synchronized static void clickLinkHavingText(String object, String data, DriverMembers obj) {
+	public static synchronized void clickLinkHavingText(String object, String data, DriverMembers obj) {
 		String xpath = null;
 		try {
 			xpath = (object + "//a[contains(text(),normalize-space('" + data + "'))]");
@@ -707,7 +698,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void clickDataVariableText(String object, String data, DriverMembers obj) {
+	public static synchronized void clickDataVariableText(String object, String data, DriverMembers obj) {
 		String value = "";
 		String xpath = null;
 		try {
@@ -764,7 +755,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void input_randomNumber(String object, String data, DriverMembers obj) {
+	public static synchronized void input_randomNumber(String object, String data, DriverMembers obj) {
 		String inputStream;
 		try {
 			inputStream = String.valueOf(obj.xlObj.randomNumber(Integer.parseInt(data)));
@@ -920,7 +911,7 @@ public class ActionKeywords {
 		obj.xlObj.setDataVariable(Constants.Sheet_DataVariables, object, value, obj);
 	}
 
-	public synchronized static void clickLinkInDynamicRow(String object, String data, DriverMembers obj) {
+	public static synchronized void clickLinkInDynamicRow(String object, String data, DriverMembers obj) {
 		String xpath = null;
 		try {
 			String lookupText = obj.xlObj.getDataVariable(Constants.Sheet_DataVariables, object, obj);
@@ -995,7 +986,7 @@ public class ActionKeywords {
 
 	}
 
-	public synchronized static void clearField(String object, String data, DriverMembers obj) {
+	public static synchronized void clearField(String object, String data, DriverMembers obj) {
 		WebElement toClear = obj.driver.findElement(By.xpath(object));
 		toClear.sendKeys(Keys.CONTROL + "a");
 		toClear.sendKeys(Keys.DELETE);
@@ -1043,7 +1034,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void inputRandomEmail(String object, String data, DriverMembers obj) {
+	public static synchronized void inputRandomEmail(String object, String data, DriverMembers obj) {
 		try {
 			String userPrefix = obj.xlObj.getRunConfig("NewGCPEmailPrefix");
 			if (userPrefix.equals("")) {
@@ -1077,7 +1068,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void inputRandomUsername(String object, String data, DriverMembers obj) {
+	public static synchronized void inputRandomUsername(String object, String data, DriverMembers obj) {
 		try {
 			String userPrefix = obj.xlObj.getRunConfig(data);
 			if (obj.generatedRandomString == null) {
@@ -1095,7 +1086,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void validateElementPresent(String object, String data, DriverMembers obj) {
+	public static synchronized void validateElementPresent(String object, String data, DriverMembers obj) {
 		try {
 			if (isElementPresent(By.xpath(object), obj)) {
 				System.out.println("Expected element displayed on UI");
@@ -1113,7 +1104,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void validateElementNotPresent(String object, String data, DriverMembers obj) {
+	public static synchronized void validateElementNotPresent(String object, String data, DriverMembers obj) {
 		try {
 			if (!isElementPresent(By.xpath(object), obj)) {
 				obj.sTestStepFailureDetail = ("Expected element not displayed on UI...");
@@ -1165,14 +1156,6 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized void executeFunctionalBlock(String object, String data, DriverMembers obj) {
-		try {
-			DriverScript.execute_Block(data, obj);
-		} catch (Exception e) {
-			setFailResult(e, obj, "");
-		}
-	}
-
 	public synchronized void inputDataFeeder(String object, String data, DriverMembers obj) {
 		String inputDataFeed = null;
 		try {
@@ -1195,13 +1178,13 @@ public class ActionKeywords {
 
 	}
 
-	public synchronized static void setScroll(String object, DriverMembers obj) {
+	public static synchronized void setScroll(String object, DriverMembers obj) {
 		JavascriptExecutor je = (JavascriptExecutor) obj.driver;
 		WebElement element = obj.driver.findElement(By.xpath(object));
 		je.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
-	public synchronized static void highlightElement(DriverMembers obj) {
+	public static synchronized void highlightElement(DriverMembers obj) {
 		try {
 			JavascriptExecutor je = (JavascriptExecutor) obj.driver;
 			WebElement element = obj.driver.findElement(By.xpath(obj.sPageObject));
@@ -1213,7 +1196,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void assertFontHexColor(String object, String data, DriverMembers obj) {
+	public static synchronized void assertFontHexColor(String object, String data, DriverMembers obj) {
 		try {
 			String expectedColor = obj.xlObj.getRunConfig(data);
 
@@ -1242,7 +1225,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void assertBackgroundHexColor(String object, String data, DriverMembers obj) {
+	public static synchronized void assertBackgroundHexColor(String object, String data, DriverMembers obj) {
 		try {
 			String expectedColor = obj.xlObj.getRunConfig(data);
 
@@ -1271,7 +1254,7 @@ public class ActionKeywords {
 		}
 	}
 
-	// public synchronized static void mouseHover(String object, String data,
+	// public static synchronized void mouseHover(String object, String data,
 	// DriverMembers obj){
 	// Actions actions = new Actions(obj.driver);
 	// WebElement target = obj.driver.findElement(By.xpath(object));
@@ -1279,7 +1262,7 @@ public class ActionKeywords {
 	// actions.moveToElement(target).perform();
 	// }
 
-	public synchronized static void setFailResult(Exception e, DriverMembers obj, String customFailureMessage) {
+	public static synchronized void setFailResult(Exception e, DriverMembers obj, String customFailureMessage) {
 		if (customFailureMessage.isEmpty()) {
 			obj.sTestStepFailureDetail = e.getMessage();
 		} else {
@@ -1290,7 +1273,7 @@ public class ActionKeywords {
 		System.out.println(e.getMessage());
 	}
 
-	public synchronized static void writeMDMFile(String object, String data, DriverMembers obj) {
+	public static synchronized void writeMDMFile(String object, String data, DriverMembers obj) {
 		try {
 			readMDMConfig.writeFile();
 		} catch (Exception e) {
@@ -1298,11 +1281,11 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void validateToggleSetting(String object, String data, DriverMembers obj) {
+	public static synchronized void validateToggleSetting(String object, String data, DriverMembers obj) {
 		obj.dbObj.validateToggleSetting(data, obj);
 	}
 
-	public synchronized static void validateRMSLOVLoad(String object, String data, DriverMembers obj) {
+	public static synchronized void validateRMSLOVLoad(String object, String data, DriverMembers obj) {
 		try {
 			obj.dbObj.validateLOVLoad(obj);
 		} catch (Exception e) {
@@ -1311,11 +1294,11 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void verifyEmailTriggered(String object, String data, DriverMembers obj) {
+	public static synchronized void verifyEmailTriggered(String object, String data, DriverMembers obj) {
 		obj.emlObj.getMail(obj);
 	}
 
-	public synchronized static void mouseHover(String object, String data, DriverMembers obj) {
+	public static synchronized void mouseHover(String object, String data, DriverMembers obj) {
 
 		try {
 			Actions actions = new Actions(obj.driver);
@@ -1328,7 +1311,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void performDragAndDrop(String object, String data, DriverMembers obj)
+	public static synchronized void performDragAndDrop(String object, String data, DriverMembers obj)
 			throws InterruptedException {
 
 		WebElement from = obj.driver.findElement(By.xpath(data));
@@ -1369,7 +1352,7 @@ public class ActionKeywords {
 
 	}
 
-	public synchronized static void performDragAndDropJS(String object, String data, DriverMembers obj)
+	public static synchronized void performDragAndDropJS(String object, String data, DriverMembers obj)
 			throws InterruptedException {
 
 		WebElement From = obj.driver.findElement(By.xpath(data));
@@ -1392,7 +1375,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void acceptAlert(String object, String data, DriverMembers obj) {
+	public static synchronized void acceptAlert(String object, String data, DriverMembers obj) {
 		try {
 			Alert alert = obj.driver.switchTo().alert(); // switch to alert
 			alert.accept();
@@ -1424,7 +1407,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void switchToFrame(String object, String data, DriverMembers obj) {
+	public static synchronized void switchToFrame(String object, String data, DriverMembers obj) {
 		try {
 			WebDriverWait wait = new WebDriverWait(obj.driver, 10);
 			WebElement iframe = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(object)));
@@ -1439,7 +1422,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void validateDropDownOptions(String object, String data, DriverMembers obj) {
+	public static synchronized void validateDropDownOptions(String object, String data, DriverMembers obj) {
 		boolean match = false;
 		String[] dataOptions = data.split(",");
 		WebElement dropDown = obj.driver.findElement(By.xpath(object));
@@ -1508,12 +1491,12 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void navigateBack(String object, String data, DriverMembers obj) {
+	public static synchronized void navigateBack(String object, String data, DriverMembers obj) {
 		obj.driver.navigate().back();
 	}
 
 	// Get The Current Day
-	public synchronized static String getCurrentDay() {
+	public static synchronized String getCurrentDay() {
 		// Create a Calendar Object
 		Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
@@ -1527,7 +1510,7 @@ public class ActionKeywords {
 	}
 
 	// Selects date in date picker
-	public synchronized static void selectCurrentDate(String object, String data, DriverMembers obj) {
+	public static synchronized void selectCurrentDate(String object, String data, DriverMembers obj) {
 
 		// Get Today's number
 		String today = getCurrentDay();
@@ -1553,7 +1536,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void selectAnyDate(String object, String data, DriverMembers obj) {
+	public static synchronized void selectAnyDate(String object, String data, DriverMembers obj) {
 
 		// date picker table
 		WebElement dateWidgetFrom = obj.driver.findElement(By.xpath(object));
@@ -1575,14 +1558,14 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static String getCurrentMonth() {
+	public static synchronized String getCurrentMonth() {
 		YearMonth thisMonth = YearMonth.now();
 		DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MMMM yyyy");
 
 		return thisMonth.format(monthYearFormatter);
 	}
 
-	public synchronized static void validateOptionsOrder(String object, String data, DriverMembers obj) {
+	public static synchronized void validateOptionsOrder(String object, String data, DriverMembers obj) {
 
 		List<String> tabOptions = new ArrayList<String>(Arrays.asList(data.split(",")));
 
@@ -1709,7 +1692,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void switchToPreviousTab(String object, String data, DriverMembers obj) {
+	public static synchronized void switchToPreviousTab(String object, String data, DriverMembers obj) {
 		try {
 
 			ArrayList<String> tabs = new ArrayList<String>(obj.driver.getWindowHandles());
@@ -1914,7 +1897,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void selectAnyDatePlanner(String object, String data, DriverMembers obj) {
+	public static synchronized void selectAnyDatePlanner(String object, String data, DriverMembers obj) {
 
 		try {
 			// WebElement element = obj.driver.findElement(By.id(OR.getProperty(object)));
@@ -1939,7 +1922,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void selectPMCall(String object, String data, DriverMembers obj) {
+	public static synchronized void selectPMCall(String object, String data, DriverMembers obj) {
 
 		try {
 			// WebElement element = obj.driver.findElement(By.id(OR.getProperty(object)));
@@ -1960,7 +1943,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void selectAMCall(String object, String data, DriverMembers obj) {
+	public static synchronized void selectAMCall(String object, String data, DriverMembers obj) {
 
 		try {
 			// WebElement element = obj.driver.findElement(By.id(OR.getProperty(object)));
@@ -1981,7 +1964,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void setScrolltoPage(String object, String data, DriverMembers obj) {
+	public static synchronized void setScrolltoPage(String object, String data, DriverMembers obj) {
 		JavascriptExecutor je = (JavascriptExecutor) obj.driver;
 		WebElement element = obj.driver.findElement(By.xpath(object));
 		je.executeScript("arguments[0].scrollIntoView(true);", element);
@@ -2044,16 +2027,15 @@ public class ActionKeywords {
 
 	}
 
-	public synchronized static void scrollwithinElement(String object, String data, DriverMembers obj) {
+	public static synchronized void scrollwithinElement(String object, String data, DriverMembers obj) {
 		JavascriptExecutor je = (JavascriptExecutor) obj.driver;
 		WebElement element = obj.driver.findElement(By.xpath(object));
 		je.executeScript("arguments[0].scrollTo(0, arguments[0].scrollHeight)", element);
 
 	}
 
-	public synchronized static void clickAndSwitchTab(String object, String data, DriverMembers obj) {
+	public static synchronized void clickAndSwitchTab(String object, String data, DriverMembers obj) {
 		try {
-			// Thread.holdsLock(Thread.currentThread());
 			String oldTab = obj.driver.getWindowHandle();
 			System.out.println("Current window handle saved successfully.");
 			obj.driver.findElement(By.xpath(object)).getLocation();
@@ -2062,7 +2044,7 @@ public class ActionKeywords {
 			ArrayList<String> newTab = null;
 
 			Thread.sleep(5000);
-			newTab = new ArrayList<String>(obj.driver.getWindowHandles());
+			newTab = new ArrayList<>(obj.driver.getWindowHandles());
 
 			newTab.remove(oldTab);
 			// change focus to new tab
@@ -2070,25 +2052,32 @@ public class ActionKeywords {
 			obj.driver.switchTo().window(newTab.get(0));
 			System.out.println("Moved to new window handle successfully");
 
-		} catch (Exception e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 			obj.sTestStepStatus = Constants.Key_Fail_Result;
 			obj.sTestCaseStatus = Constants.Key_Fail_Result;
 			obj.sTestStepFailureDetail = e.getMessage();
-			// Log.info("Unable to complete window switch");
 			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+			Thread.currentThread().interrupt();
 		}
+		catch (Exception e) {
+			e.printStackTrace();
+			obj.sTestStepStatus = Constants.Key_Fail_Result;
+			obj.sTestCaseStatus = Constants.Key_Fail_Result;
+			obj.sTestStepFailureDetail = e.getMessage();
+			System.out.print(Thread.currentThread().getName() + Thread.currentThread().isAlive());
+		} 
 
 	}
 
-	public synchronized static void scrollTillPageEnd(String object, String data, DriverMembers obj) {
+	public static synchronized void scrollTillPageEnd(String object, String data, DriverMembers obj) {
 		JavascriptExecutor je = (JavascriptExecutor) obj.driver;
 		// je.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 		je.executeScript(
 				"window.scrollTo(0,Math.max(document.documentElement.scrollHeight,document.body.scrollHeight,document.documentElement.clientHeight));");
 	}
 
-	public synchronized static void placeMDMTestData(String object, String data, DriverMembers obj) {
+	public static synchronized void placeMDMTestData(String object, String data, DriverMembers obj) {
 		try {
 			obj.mdm.prepareAndTransferMDMFile(obj);
 		} catch (Exception e) {
@@ -2097,7 +2086,7 @@ public class ActionKeywords {
 		}
 	}
 
-	public synchronized static void checkMDMExecution(String object, String data, DriverMembers obj) {
+	public static synchronized void checkMDMExecution(String object, String data, DriverMembers obj) {
 		try {
 			obj.dbObj.checkMDMStatus(obj);
 		} catch (Exception e) {
