@@ -1,4 +1,4 @@
-package com.infobeans.automation.utility;
+package automation.utility;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,8 +17,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.infobeans.automation.config.Constants;
-import com.infobeans.automation.core.DriverMembers;
+
+import automation.config.Constants;
+import automation.core.DriverMembers;
 
 public class Reporting {
 	static ExtentSparkReporter htmlReporter;

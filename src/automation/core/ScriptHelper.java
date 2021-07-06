@@ -1,4 +1,4 @@
-package com.infobeans.automation.core;
+package automation.core;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,9 +11,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.infobeans.automation.config.Constants;
-import com.infobeans.automation.utility.ExcelUtils;
-import com.infobeans.automation.utility.Log;
+import automation.config.Constants;
+import automation.utility.ExcelUtils;
+import automation.utility.Log;
 
 public class ScriptHelper {
 

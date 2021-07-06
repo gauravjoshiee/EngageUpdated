@@ -1,4 +1,4 @@
-package com.infobeans.automation.utility;
+package automation.utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,10 +15,10 @@ import java.util.Properties;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
-import com.infobeans.automation.config.Constants;
-import com.infobeans.automation.core.DriverMembers;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
+import automation.config.Constants;
+import automation.core.DriverMembers;
 import net.sf.json.JSONObject;;
 
 @SuppressWarnings("static-access")

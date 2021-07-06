@@ -1,4 +1,4 @@
-package com.infobeans.automation.core;
+package automation.core;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.infobeans.automation.config.ActionKeywords;
-import com.infobeans.automation.config.Constants;
-import com.infobeans.automation.utility.ExcelUtils;
-import com.infobeans.automation.utility.Log;
-import com.infobeans.automation.utility.Reporting;
+import automation.config.ActionKeywords;
+import automation.config.Constants;
+import automation.utility.ExcelUtils;
+import automation.utility.Log;
+import automation.utility.Reporting;
 
 @SuppressWarnings("static-access")
 public class DriverScript {

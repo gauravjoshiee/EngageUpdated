@@ -1,4 +1,4 @@
-package com.infobeans.automation.core;
+package automation.core;
 
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;

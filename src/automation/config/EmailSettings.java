@@ -1,4 +1,4 @@
-package com.infobeans.automation.config;
+package automation.config;
 
 public class EmailSettings {
 	

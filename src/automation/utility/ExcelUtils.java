@@ -1,4 +1,4 @@
-package com.infobeans.automation.utility;
+package automation.utility;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,9 +15,9 @@ import org.apache.poi.xssf.usermodel.XSSFHyperlink;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import com.infobeans.automation.config.Constants;
-import com.infobeans.automation.core.DriverMembers;
-import com.infobeans.automation.core.DriverScript;
+import automation.config.Constants;
+import automation.core.DriverMembers;
+import automation.core.DriverScript;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;

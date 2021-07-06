@@ -1,4 +1,4 @@
-package com.infobeans.automation.core;
+package automation.core;
 
 import java.lang.reflect.Method;
 
@@ -8,13 +8,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import com.infobeans.automation.config.ActionKeywords;
-import com.infobeans.automation.config.Constants;
-import com.infobeans.automation.utility.DBUtils;
-import com.infobeans.automation.utility.EmailListner;
-import com.infobeans.automation.utility.ExcelUtils;
-import com.infobeans.automation.utility.Reporting;
-
+import automation.config.ActionKeywords;
+import automation.config.Constants;
+import automation.utility.DBUtils;
+import automation.utility.EmailListner;
+import automation.utility.ExcelUtils;
+import automation.utility.Reporting;
 import net.sf.json.JSONObject;
 
 public class DriverMembers {

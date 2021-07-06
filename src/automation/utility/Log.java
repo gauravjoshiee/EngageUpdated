@@ -1,4 +1,4 @@
-package com.infobeans.automation.utility;
+package automation.utility;
 
 
 import org.apache.logging.log4j.*;

@@ -1,4 +1,4 @@
-package com.infobeans.automation.utility;
+package automation.utility;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -11,9 +11,9 @@ import java.util.Map;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
-import com.infobeans.automation.config.Constants;
-import com.infobeans.automation.core.DriverMembers;
-import com.infobeans.automation.core.DriverScript;
+import automation.config.Constants;
+import automation.core.DriverMembers;
+import automation.core.DriverScript;
 
 public class readMDMConfig {
 	

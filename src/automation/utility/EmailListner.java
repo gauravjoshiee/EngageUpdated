@@ -1,4 +1,4 @@
-package com.infobeans.automation.utility;
+package automation.utility;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -28,9 +28,9 @@ import javax.mail.search.AndTerm;
 import javax.mail.search.SearchTerm;
 import javax.mail.search.SubjectTerm;
 
-import com.infobeans.automation.config.Constants;
-import com.infobeans.automation.config.EmailSettings;
-import com.infobeans.automation.core.DriverMembers;
+import automation.config.Constants;
+import automation.config.EmailSettings;
+import automation.core.DriverMembers;
 
 @SuppressWarnings("static-access")
 public class EmailListner {

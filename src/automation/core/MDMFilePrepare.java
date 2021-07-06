@@ -1,4 +1,4 @@
-package com.infobeans.automation.core;
+package automation.core;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.infobeans.automation.utility.ExcelUtils;
+import automation.utility.ExcelUtils;
 
 import org.json.simple.JSONObject;
 

@@ -1,4 +1,4 @@
-package com.infobeans.automation.config;
+package automation.config;
 
 import java.awt.AWTException;
 import java.awt.Robot;
@@ -36,11 +36,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.infobeans.automation.core.DriverMembers;
-import com.infobeans.automation.core.DriverScript;
-import com.infobeans.automation.utility.ExcelUtils;
-import com.infobeans.automation.utility.readMDMConfig;
-
+import automation.core.DriverMembers;
+import automation.core.DriverScript;
+import automation.utility.ExcelUtils;
+import automation.utility.readMDMConfig;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 @SuppressWarnings("static-access")

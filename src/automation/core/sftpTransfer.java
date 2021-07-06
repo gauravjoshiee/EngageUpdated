@@ -1,4 +1,4 @@
-package com.infobeans.automation.core;
+package automation.core;
 import java.util.Iterator;
 import java.util.Map;
 import com.jcraft.jsch.ChannelSftp;
